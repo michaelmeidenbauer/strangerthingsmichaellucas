@@ -52,7 +52,7 @@ export const getMyInfo = async (token) => {
 };
 
 export const getAllPosts = async () => {
-  fetch('https://strangers-things.herokuapp.com/api/COHORT-NAME/posts')
+  fetch(`${apiPath}posts`)
     .then((response) => response.json())
     .then((result) => {
       console.log(result);
@@ -61,7 +61,7 @@ export const getAllPosts = async () => {
 };
 
 export const createPost = async (title, description, price, location, willDeliver, token) => {
-  fetch('https://strangers-things.herokuapp.com/api/COHORT-NAME/posts', {
+  fetch(`${apiPath}posts`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
