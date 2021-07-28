@@ -1,1 +1,0 @@
-const whatsUp = 'what up';
