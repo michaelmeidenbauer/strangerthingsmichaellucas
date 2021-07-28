@@ -1,0 +1,1 @@
+const whatsUp = 'what up';
