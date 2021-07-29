@@ -10,12 +10,25 @@ const Postform = () => {
   const [location, updateLocation] = useState(null);
   const [willDeliver, updateWillDeliver] = useState(null);
 
+  const formSubmitHandler = async (event) => {
+    event.preventDefault();
+    try {
+      const postCreationSuccess = await createPost(
+        title,
+        description,
+        price,
+        location,
+        false,
+        willDeliver,
+      );
+      console.log(postCreationSuccess);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
-    <form onSubmit={(event) => {
-      event.preventDefault();
-      createPost(title, description, price, location, false, willDeliver);
-    }}
-    >
+    <form onSubmit={formSubmitHandler}>
       <input
         type="text"
         defaultValue="title"

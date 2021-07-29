@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  getAllPosts,
+  // getAllPosts,
   // registerUser,
   loginUser,
   // getMyInfo,
@@ -9,15 +9,28 @@ import {
 const Login = () => {
   const [userName, updateUsername] = useState(null);
   const [passWord, updatePassword] = useState(null);
-  console.log('pw: ', passWord, 'un: ', userName);
+  const [loginFail, updateLoginFail] = useState(false);
+  const [loginSuccess, updateLoginSuccess] = useState(false);
+  console.log('un: ', userName, 'pw: ', passWord);
+
+  const loginSubmitHandler = async (event) => {
+    event.preventDefault();
+    const loginResult = await loginUser(userName, passWord);
+    console.log(loginResult);
+    if (loginResult.success) {
+      updateLoginFail(false);
+      updateLoginSuccess(true);
+      const { data: { token } } = loginResult;
+      const stringToken = JSON.stringify(token);
+      localStorage.setItem('strangersThingsToken', stringToken);
+    } else {
+      updateLoginSuccess(false);
+      updateLoginFail(true);
+    }
+  };
 
   return (
-    <form onSubmit={(event) => {
-      event.preventDefault();
-      loginUser(userName, passWord);
-      getAllPosts();
-    }}
-    >
+    <form onSubmit={loginSubmitHandler}>
       <input
         type="text"
         defaultValue="enter username here"
@@ -27,7 +40,7 @@ const Login = () => {
         }}
       />
       <input
-        type="text"
+        type="password"
         defaultValue="enter password here"
         onChange={(event) => {
           event.preventDefault();
@@ -39,6 +52,24 @@ const Login = () => {
       >
         Login
       </button>
+      {
+        loginFail
+          ? (
+            <div className="loginFail">
+              <p style={{ color: 'red' }}>Incorrect username/password. Please try again.</p>
+            </div>
+          )
+          : null
+      }
+      {
+        loginSuccess
+          ? (
+            <div className="loginFail">
+              <p style={{ color: 'green' }}>You are logged in!</p>
+            </div>
+          )
+          : null
+      }
     </form>
   );
 };

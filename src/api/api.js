@@ -1,7 +1,7 @@
 const apiPath = 'https://strangers-things.herokuapp.com/api/2104-web-pt/';
 
 export const registerUser = async (userName, passWord) => {
-  fetch(`${apiPath}users/register`, {
+  const fetchResult = await fetch(`${apiPath}users/register`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -12,15 +12,13 @@ export const registerUser = async (userName, passWord) => {
         password: passWord,
       },
     }),
-  }).then((response) => response.json())
-    .then((result) => {
-      console.log(result);
-    })
-    .catch(console.error);
+  });
+  const json = await fetchResult.json();
+  return json;
 };
 
 export const loginUser = async (userName, passWord) => {
-  fetch(`${apiPath}users/login`, {
+  const fetchResult = await fetch(`${apiPath}users/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -31,37 +29,31 @@ export const loginUser = async (userName, passWord) => {
         password: passWord,
       },
     }),
-  }).then((response) => response.json())
-    .then((result) => {
-      console.log(result);
-    })
-    .catch(console.error);
+  });
+  const json = await fetchResult.json();
+  return json;
 };
 
 export const getMyInfo = async (token) => {
-  fetch(`${apiPath}users/me`, {
+  const fetchResult = await fetch(`${apiPath}users/me`, {
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
-  }).then((response) => response.json())
-    .then((result) => {
-      console.log(result);
-    })
-    .catch(console.error);
+  });
+  const json = await fetchResult.json();
+  return json;
 };
 
 export const getAllPosts = async () => {
-  fetch(`${apiPath}posts`)
-    .then((response) => response.json())
-    .then((result) => {
-      console.log(result);
-    })
-    .catch(console.error);
+  const fetchResult = await fetch(`${apiPath}posts`);
+  const json = await fetchResult.json();
+  return json;
 };
 
 export const createPost = async (title, description, price, location, willDeliver, token) => {
-  fetch(`${apiPath}posts`, {
+  const fetchResult = await fetch(`${apiPath}posts`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -76,13 +68,72 @@ export const createPost = async (title, description, price, location, willDelive
         willDeliver,
       },
     }),
-  }).then((response) => response.json())
-    .then((result) => {
-      console.log(result);
-    })
-    .catch(console.error);
+  });
+  const json = await fetchResult.json();
+  return json;
 };
 
-export const fakeFunction = async () => {
+export const editPost = async (title, description, price, location, willDeliver, token, postID) => {
+  const fetchResult = await fetch(`${apiPath}posts/${postID}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      post: {
+        title,
+        description,
+        price,
+        location,
+        willDeliver,
+      },
+    }),
+  });
+  const json = await fetchResult.json();
+  return json;
+};
 
+export const deletePost = async (title,
+  description,
+  price,
+  location,
+  willDeliver,
+  token,
+  postID) => {
+  const fetchResult = await fetch(`${apiPath}posts/${postID}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      post: {
+        title,
+        description,
+        price,
+        location,
+        willDeliver,
+      },
+    }),
+  });
+  const json = await fetchResult.json();
+  return json;
+};
+
+export const addMessageToPost = async (content, postID, token) => {
+  const fetchResult = await fetch(`${apiPath}posts/${postID}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      message: {
+        content,
+      },
+    }),
+  });
+  const json = await fetchResult.json();
+  return json;
 };
