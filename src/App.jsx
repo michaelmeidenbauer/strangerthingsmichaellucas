@@ -1,17 +1,42 @@
 import React from 'react';
 import './App.css';
+import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import Login from './components/Login';
-import Postform from './components/Postform';
+import Navbar from './components/Navbar';
+import Posts from './components/Posts';
 
 function App() {
+  // const [isLoggedIn, updateIsLoggedIn] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <Login />
-        <h1>MICHAEL AND LUCAS RULE</h1>
-        <Postform />
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Switch>
+          <Route path="/posts">
+            <Posts />
+          </Route>
+          <Route path="/post">
+            {/* <Post /> */}
+          </Route>
+          <Route path="/profile">
+            {/* <Profile /> */}
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/register">
+            {/* <Register /> */}
+          </Route>
+          <Route path="/">
+            {/* <Home /> */}
+            <header className="App-header">
+              <Navbar />
+              <h1>MICHAEL AND LUCAS RULE</h1>
+            </header>
+          </Route>
+        </Switch>
+      </div>
+    </BrowserRouter>
   );
 }
 

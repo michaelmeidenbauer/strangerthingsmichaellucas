@@ -49,7 +49,7 @@ export const getMyInfo = async (token) => {
 export const getAllPosts = async () => {
   const fetchResult = await fetch(`${apiPath}posts`);
   const json = await fetchResult.json();
-  return json;
+  return json.data.posts;
 };
 
 export const createPost = async (title, description, price, location, willDeliver, token) => {

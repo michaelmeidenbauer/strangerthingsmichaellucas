@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import {
   // getAllPosts,
   // registerUser,
@@ -53,22 +54,16 @@ const Login = () => {
         Login
       </button>
       {
-        loginFail
-          ? (
+        loginFail && (
             <div className="loginFail">
               <p style={{ color: 'red' }}>Incorrect username/password. Please try again.</p>
             </div>
           )
-          : null
       }
       {
-        loginSuccess
-          ? (
-            <div className="loginFail">
-              <p style={{ color: 'green' }}>You are logged in!</p>
-            </div>
+        loginSuccess && (
+          <Redirect to="/" />
           )
-          : null
       }
     </form>
   );
