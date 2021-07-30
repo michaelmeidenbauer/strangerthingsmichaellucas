@@ -11,12 +11,13 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
+        <Navbar />
         <Switch>
-          <Route path="/posts">
+          <Route exact path="/posts">
             <Posts />
           </Route>
-          <Route path="/post">
-            {/* <Post /> */}
+          <Route exact path="/posts/add">
+            <h1>ADD POST</h1>
           </Route>
           <Route path="/profile">
             {/* <Profile /> */}
@@ -30,7 +31,6 @@ function App() {
           <Route path="/">
             {/* <Home /> */}
             <header className="App-header">
-              <Navbar />
               <h1>MICHAEL AND LUCAS RULE</h1>
             </header>
           </Route>
