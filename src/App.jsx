@@ -5,6 +5,7 @@ import Login from './components/Login';
 import Navbar from './components/Navbar';
 import Posts from './components/Posts';
 import Register from './components/Register';
+import Profile from './components/Profile';
 
 function App() {
   // const [isLoggedIn, updateIsLoggedIn] = useState(false);
@@ -21,7 +22,7 @@ function App() {
             <h1>ADD POST</h1>
           </Route>
           <Route path="/profile">
-            {/* <Profile /> */}
+            <Profile />
           </Route>
           <Route path="/login">
             <Login />
