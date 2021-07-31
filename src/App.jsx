@@ -4,6 +4,7 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import Login from './components/Login';
 import Navbar from './components/Navbar';
 import Posts from './components/Posts';
+import Register from './components/Register';
 
 function App() {
   // const [isLoggedIn, updateIsLoggedIn] = useState(false);
@@ -24,6 +25,7 @@ function App() {
           </Route>
           <Route path="/login">
             <Login />
+            <Register />
           </Route>
           <Route path="/register">
             {/* <Register /> */}
