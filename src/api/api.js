@@ -36,7 +36,6 @@ export const loginUser = async (userName, passWord) => {
 
 export const getMyInfo = async (token) => {
   const fetchResult = await fetch(`${apiPath}users/me`, {
-    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
@@ -122,8 +121,8 @@ export const deletePost = async (title,
 };
 
 export const addMessageToPost = async (content, postID, token) => {
-  const fetchResult = await fetch(`${apiPath}posts/${postID}`, {
-    method: 'DELETE',
+  const fetchResult = await fetch(`${apiPath}posts/${postID}/messages`, {
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
