@@ -36,7 +36,7 @@ export const loginUser = async (userName, passWord) => {
 
 export const getMyInfo = async (token) => {
   const fetchResult = await fetch(`${apiPath}users/me`, {
-    method: 'POST',
+    // method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,

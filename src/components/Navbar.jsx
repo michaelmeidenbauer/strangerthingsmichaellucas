@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom';
 or Log Out, depending on presence of user token or perhaps current user state
 */
 const Navbar = () => (
-  <div>
-    <Link to="/">Home</Link>
-    <Link to="/posts">Posts</Link>
-    <Link to="/profile">Profile</Link>
-    <Link to="/login">Log In</Link>
+  <div style={{padding: '5px'}}>
+    <Link to="/" style={{padding: '5px'}}>Home</Link>
+    <Link to="/posts" style={{padding: '5px'}}>Posts</Link>
+    <Link to="/profile" style={{padding: '5px'}}>Profile</Link>
+    <Link to="/login" style={{padding: '5px'}}>Log In</Link>
   </div>
 );
 
