@@ -1,13 +1,16 @@
 import React, { useState } from "react";
+import PropTypes from 'prop-types';
 import { Redirect } from "react-router";
 import { registerUser } from "../api/api";
 
 
-const Register = () => {
+const Register = (props) => {
   const [userName, updateUserName] = useState(null);
   const [passWord, updatePassWord] = useState(null);
   const [registerFail, updateRegisterFail] = useState(false);
   const [registerSuccess, updateRegisterSuccess] = useState(false);
+
+  const { updateIsLoggedIn } = props;
 
   const registerSubmitHandler = async (event) => {
     event.preventDefault();
@@ -18,6 +21,7 @@ const Register = () => {
       console.log(registerResponse);
       updateRegisterSuccess(true);
       updateRegisterFail(false);
+      updateIsLoggedIn(true);
       const {
         data: { token },
       } = registerResponse;
@@ -57,5 +61,9 @@ const Register = () => {
     </div>
   );
 };
+
+Register.propTypes = {
+  updateIsLoggedIn: PropTypes.func.isRequired,
+}
 
 export default Register;

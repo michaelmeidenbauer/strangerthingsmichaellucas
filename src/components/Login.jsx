@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import {
   // getAllPosts,
@@ -7,11 +8,14 @@ import {
   // getMyInfo,
 } from '../api/api';
 
-const Login = () => {
+const Login = (props) => {
   const [userName, updateUsername] = useState(null);
   const [passWord, updatePassword] = useState(null);
   const [loginFail, updateLoginFail] = useState(false);
   const [loginSuccess, updateLoginSuccess] = useState(false);
+  
+  const { updateIsLoggedIn } = props;
+
   console.log('un: ', userName, 'pw: ', passWord);
 
   const loginSubmitHandler = async (event) => {
@@ -21,6 +25,7 @@ const Login = () => {
     if (loginResult.success) {
       updateLoginFail(false);
       updateLoginSuccess(true);
+      updateIsLoggedIn(true);
       const { data: { token } } = loginResult;
       const stringToken = JSON.stringify(token);
       localStorage.setItem('strangersThingsToken', stringToken);
@@ -68,5 +73,9 @@ const Login = () => {
     </form>
   );
 };
+
+Login.propTypes = {
+  updateIsLoggedIn: PropTypes.func.isRequired,
+}
 
 export default Login;
