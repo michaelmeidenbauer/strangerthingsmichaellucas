@@ -43,6 +43,8 @@ const Register = (props) => {
             event.preventDefault();
             updateUserName(event.target.value);
           }}
+          minLength='5'
+          required
         />
         <input
           type="password"
@@ -51,6 +53,8 @@ const Register = (props) => {
             event.preventDefault();
             updatePassWord(event.target.value);
           }}
+          minLength='5'
+          required
         />
         <button type="submit">Register</button>
         {registerFail && (
