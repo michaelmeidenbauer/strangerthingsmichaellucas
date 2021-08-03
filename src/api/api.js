@@ -45,9 +45,15 @@ export const getMyInfo = async (token) => {
   return json;
 };
 
-export const getAllPosts = async () => {
-  const fetchResult = await fetch(`${apiPath}posts`);
+export const getAllPosts = async (token) => {
+  const fetchResult = await fetch(`${apiPath}posts`, {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  });
   const json = await fetchResult.json();
+  console.log('posts: ',json.data.posts);
   return json.data.posts;
 };
 

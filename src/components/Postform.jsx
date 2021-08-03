@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   createPost,
 } from '../api/api';
@@ -8,7 +8,12 @@ const Postform = () => {
   const [description, updateDescription] = useState(null);
   const [price, updatePrice] = useState(null);
   const [location, updateLocation] = useState(null);
-  const [willDeliver, updateWillDeliver] = useState(null);
+  const [willDeliver, updateWillDeliver] = useState(false);
+  const [token, updateToken] = useState(null);
+    useEffect(() => {
+        const localToken = JSON.parse(localStorage.getItem('strangersThingsToken')) ?? null;
+        updateToken(localToken);
+    }, []);
 
   const formSubmitHandler = async (event) => {
     event.preventDefault();
@@ -18,8 +23,8 @@ const Postform = () => {
         description,
         price,
         location,
-        false,
         willDeliver,
+        token,
       );
       console.log(postCreationSuccess);
     } catch (error) {
@@ -61,14 +66,17 @@ const Postform = () => {
           updateLocation(event.target.value);
         }}
       />
+      <div className="checkbox">
+      <span>Will deliver?</span>
       <input
-        type="text"
+        type="checkbox"
         defaultValue="will deliver"
-        onChange={(event) => {
-          event.preventDefault();
-          updateWillDeliver(event.target.value);
+        name="willDeliver?"
+        onChange={() => {
+          updateWillDeliver(!willDeliver);
         }}
       />
+      </div>
       <button
         type="submit"
       >

@@ -10,7 +10,8 @@ const SinglePost = ({ match }) => {
     const [showMessageUI, updateShowMessageUI] = useState(false);
     const currentPostId = match.params.postID;
     useEffect(async () => {
-        const downloadedPosts = await getAllPosts();
+        const localToken = JSON.parse(localStorage.getItem('strangersThingsToken')) ?? null;
+        const downloadedPosts = await getAllPosts(localToken);
         const singledOutPost = downloadedPosts.filter(post => post._id === currentPostId)[0];
         updateSinglePost(singledOutPost);    
     }, []);
@@ -53,6 +54,14 @@ const SinglePost = ({ match }) => {
                             />
                         }
                     </div>
+                )
+            }
+            {
+                singlePost && singlePost.isAuthor &&
+                (
+                    <Link to={{
+                        pathname: `/posts/edit/${singlePost._id}`
+                    }}>Edit/Delete Post</Link>
                 )
             }
         </>
