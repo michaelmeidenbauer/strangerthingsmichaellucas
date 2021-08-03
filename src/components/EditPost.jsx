@@ -28,6 +28,7 @@ const EditPost = ({ match }) => {
         const singledOutPost = downloadedPosts.filter(post => post._id === currentPostId)[0];
         updatePostToEdit(singledOutPost);
         updateTitle(singledOutPost.title);
+        updateDescription(singledOutPost.description);
         updatePrice(singledOutPost.price);
         updateLocation(singledOutPost.location);
         updateWillDeliver(singledOutPost.willDeliver);
