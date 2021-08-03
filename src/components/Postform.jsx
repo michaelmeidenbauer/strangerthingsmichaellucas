@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Redirect} from 'react-router-dom';
 import {
   createPost,
 } from '../api/api';
@@ -10,6 +11,7 @@ const Postform = () => {
   const [location, updateLocation] = useState(null);
   const [willDeliver, updateWillDeliver] = useState(false);
   const [token, updateToken] = useState(null);
+  const [submitSuccess, updateSubmitSuccess] = useState(false);
     useEffect(() => {
         const localToken = JSON.parse(localStorage.getItem('strangersThingsToken')) ?? null;
         updateToken(localToken);
@@ -26,11 +28,17 @@ const Postform = () => {
         willDeliver,
         token,
       );
-      console.log(postCreationSuccess);
+      if (postCreationSuccess.success) {
+        updateSubmitSuccess(true);
+    }
     } catch (error) {
       console.error(error);
     }
   };
+
+  if (submitSuccess) {
+    return <Redirect to="/posts" />
+  }
 
   return (
     <form onSubmit={formSubmitHandler}>

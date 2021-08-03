@@ -1,6 +1,7 @@
 /* eslint-disable react/require-default-props */
 /* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import ListPost from './ListPost';
 import { getAllPosts } from '../api/api';
 
@@ -33,6 +34,9 @@ const Posts = () => {
                 <button type="submit">Search</button>
                 <button type="button" onClick={() => updateDisplayPosts(allPosts)}>Clear search</button>
             </form>
+            <Link to={{
+                            pathname: `/posts/add`
+                        }}>Add Post</Link>
             <>
                 {
                     displayPosts.map(post => (

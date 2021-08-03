@@ -69,6 +69,12 @@ const EditPost = ({ match }) => {
         textAlign: 'center'
     };
 
+    if (updateOrDeleteSuccess) {
+        return (
+            <Redirect to="/posts" />
+            )
+    }
+
     return (
         <>
         {
@@ -155,11 +161,6 @@ const EditPost = ({ match }) => {
         </form>
     )
         }
-        {
-        updateOrDeleteSuccess && (
-          <Redirect to="/posts" />
-          )
-      }
         </>
     );
 };
