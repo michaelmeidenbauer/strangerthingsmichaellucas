@@ -35,7 +35,7 @@ function App() {
           <Route path="/">
             {/* <Home /> */}
             <header className="App-header">
-              <h1>MICHAEL AND LUCAS RULE</h1>
+              <h1>WELCOME TO THIS BOOTLEG ASS CRAIGSLIST</h1>
             </header>
           </Route>
         </Switch>

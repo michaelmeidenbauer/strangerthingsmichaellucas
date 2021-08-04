@@ -36,7 +36,7 @@ const SinglePost = ({ match }) => {
                     singlePost.messages.length > 0 &&
                     (
                         <>
-                            <h3>Messages about this post:</h3>
+                            <h3>You have received {singlePost.messages.length} {singlePost.messages.length > 1 ? 'messages': 'message'} about this post:</h3>
                             {
                                 singlePost.messages.map(message => (
                                     <div key={message._id}>
