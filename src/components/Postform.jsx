@@ -12,6 +12,7 @@ const Postform = () => {
   const [willDeliver, updateWillDeliver] = useState(false);
   const [token, updateToken] = useState(null);
   const [submitSuccess, updateSubmitSuccess] = useState(false);
+  const [submitFail, updateSubmitFail] = useState(false);
     useEffect(() => {
         const localToken = JSON.parse(localStorage.getItem('strangersThingsToken')) ?? null;
         updateToken(localToken);
@@ -30,6 +31,8 @@ const Postform = () => {
       );
       if (postCreationSuccess.success) {
         updateSubmitSuccess(true);
+    } else {
+      updateSubmitFail(true);
     }
     } catch (error) {
       console.error(error);
@@ -41,6 +44,7 @@ const Postform = () => {
   }
 
   return (
+    <>
     <form onSubmit={formSubmitHandler}>
       <input
         type="text"
@@ -91,6 +95,12 @@ const Postform = () => {
         Submit
       </button>
     </form>
+    {
+      submitFail && (
+        <p style={{color: 'red'}}>Post submission failed. Please login or register to create posts.</p>
+      )
+    }
+    </>
   );
 };
 
