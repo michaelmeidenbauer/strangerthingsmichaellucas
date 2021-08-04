@@ -26,10 +26,8 @@ const Navbar = (props) => {
           to="/"
           style={{ padding: "5px" }}
           onClick={() => {
-            // event.preventDefault();
             localStorage.removeItem("strangersThingsToken");
             updateIsLoggedIn(false);
-            console.log(isLoggedIn);
           }}
         >
           Log Out
