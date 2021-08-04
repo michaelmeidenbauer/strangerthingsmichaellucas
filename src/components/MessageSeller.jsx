@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import Card from 'react-bootstrap/Card';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import Row from 'react-bootstrap/Row';
 import { addMessageToPost } from '../api/api';
 
 const MessageSeller = ({ seller, postID, updateShowMessageUI }) => {
@@ -29,13 +33,17 @@ const MessageSeller = ({ seller, postID, updateShowMessageUI }) => {
     };
 
     return (
-        <div>
-            <h3>Message to {seller}:</h3>
-            <form onSubmit={handleMessageSubmit}>
+        <Card className="mt-2 w-75 mx-auto">
+            <Card.Title>Message to {seller}:</Card.Title>
+            <Form onSubmit={handleMessageSubmit}>
+            <Row>
             <textarea onChange={handleTextAreaInput}/>
-            <button type="submit">Send Message</button>
-            </form>
-        </div>
+            </Row>
+            <Row>
+            <Button type="submit">Send Message</Button>
+            </Row>
+            </Form>
+        </Card>
     )
 };
 

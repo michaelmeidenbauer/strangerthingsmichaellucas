@@ -41,7 +41,7 @@ const Login = (props) => {
     <form onSubmit={loginSubmitHandler}>
       <input
         type="text"
-        defaultValue="enter username here"
+        placeholder="username"
         onChange={(event) => {
           event.preventDefault();
           updateUsername(event.target.value);
@@ -49,7 +49,7 @@ const Login = (props) => {
       />
       <input
         type="password"
-        defaultValue="enter password here"
+        placeholder="password"
         onChange={(event) => {
           event.preventDefault();
           updatePassword(event.target.value);

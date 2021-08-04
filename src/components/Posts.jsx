@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Container from 'react-bootstrap/Container';
 import ListPost from './ListPost';
 import Loading from './Loading';
 import { getAllPosts } from '../api/api';
@@ -36,7 +37,7 @@ const Posts = () => {
     }
 
     return (
-        <div>
+        <Container className="content-align-center mx-auto">
             <form onSubmit={searchHandler}>
                 <input type="text" onChange={event => updateSearchTerm(event.target.value)} />
                 <button type="submit">Search</button>
@@ -51,7 +52,7 @@ const Posts = () => {
                 }}>Add Post</Link>)
 
             }
-            <>
+            <Container>
                 {
                     displayPosts.map(post => (
                         <div key={post._id}>
@@ -59,8 +60,8 @@ const Posts = () => {
                         </div>
                     ))
                 }
-            </>
-        </div>
+            </Container>
+        </Container>
     )
 };
 
