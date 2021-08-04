@@ -16,6 +16,8 @@ const Login = (props) => {
   
   const { updateIsLoggedIn } = props;
 
+  console.log(localStorage.getItem("strangersThingsToken"))
+
   console.log('un: ', userName, 'pw: ', passWord);
 
   const loginSubmitHandler = async (event) => {
