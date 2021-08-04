@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getAllPosts } from '../api/api';
 import MessageSeller from './MessageSeller';
+import Loading from './Loading';
 
 const SinglePost = ({ match }) => {
     const [singlePost, updateSinglePost] = useState(null);
@@ -13,59 +14,62 @@ const SinglePost = ({ match }) => {
         const localToken = JSON.parse(localStorage.getItem('strangersThingsToken')) ?? null;
         const downloadedPosts = await getAllPosts(localToken);
         const singledOutPost = downloadedPosts.filter(post => post._id === currentPostId)[0];
-        updateSinglePost(singledOutPost);    
+        updateSinglePost(singledOutPost);
     }, []);
-    console.log(singlePost);
+    console.log('post deets: ', singlePost);
+
+    if (!singlePost) {
+        return (
+            <Loading 
+            contentType='post details'/>
+        )
+    }
+
     return (
         <>
-            {
-                singlePost &&
-                (
-                    <div className="single-post">
-                        <h1>{singlePost.title}</h1>
-                        <h3 >Seller: {singlePost.author.username} Location: {singlePost.location}</h3>
-                        <h2 style={{ color: 'red' }}>{singlePost.price}</h2>
-                        <p>{singlePost.description}</p>
-                        {
-                            singlePost.messages.length > 0 &&
-                            (
-                                <>
-                                <h4>Comments on this post:</h4>
-                                {
+            <div className="single-post">
+                <h1>{singlePost.title}</h1>
+                <h3 >Seller: {singlePost.author.username} Location: {singlePost.location}</h3>
+                <h2 style={{ color: 'red' }}>Price: {singlePost.price}</h2>
+                <p>{singlePost.description}</p>
+                {
+                    singlePost.messages.length > 0 &&
+                    (
+                        <>
+                            <h3>Messages about this post:</h3>
+                            {
                                 singlePost.messages.map(message => (
                                     <div key={message._id}>
-                                    <p>{message.content}</p>
+                                        <p><strong>From {message.fromUser.username}</strong>: {message.content}</p>
                                     </div>
                                 ))
-                                }
-                                </>
-                            )
-                        }
-                        <Link to={{
-                            pathname: `/posts`
-                        }}>Back to all posts</Link>
-                        <button type="button" onClick={() => updateShowMessageUI(!showMessageUI)}>Message seller</button>
-                        {
-                            showMessageUI &&
-                            <MessageSeller
-                            seller={singlePost.author.username}
-                            postID={singlePost._id}
-                            updateShowMessageUI={updateShowMessageUI}
-                            />
-                        }
-                    </div>
-                )
-            }
-            {
-                singlePost && singlePost.isAuthor &&
-                (
-                    <Link to={{
-                        pathname: `/posts/edit/${singlePost._id}`
-                    }}>Edit/Delete Post</Link>
-                )
-            }
+                            }
+                        </>
+                    )
+                }
+                <Link to={{
+                    pathname: `/posts`
+                }}>Back to all posts</Link>
+                <button type="button" onClick={() => updateShowMessageUI(!showMessageUI)}>Message seller</button>
+                {
+                    showMessageUI &&
+                    <MessageSeller
+                        seller={singlePost.author.username}
+                        postID={singlePost._id}
+                        updateShowMessageUI={updateShowMessageUI}
+                    />
+                }
+            </div>
+        {
+    singlePost.isAuthor &&
+        (
+            <Link to={{
+                pathname: `/posts/edit/${singlePost._id}`
+            }}>Edit/Delete Post</Link>
+        )
+        }
         </>
-    )
+)
 };
 
 // SinglePost.propTypes = {

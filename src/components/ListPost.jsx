@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 const ListPosts = ({ post }) => (
-    <div key={post._id}>
-        <h1>Title</h1>
-        <p>{post.title}</p>
-        <h1>Description</h1>
-        <p>{post.description}</p>
+    <div key={post._id} className="list-post">
         <Link to={{
             pathname: `/posts/${post._id}`
-        }}>See full posting</Link>
+        }}>
+            <h1>{post.title}</h1>
+        </Link>
+        <h4>Asking price: {post.price}</h4>
+        <p>{post.description}</p>
     </div>
 )
 
@@ -20,6 +20,7 @@ ListPosts.propTypes = {
         _id: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
         description: PropTypes.string.isRequired,
+        price: PropTypes.string.isRequired,
     }).isRequired,
 };
 

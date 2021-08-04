@@ -48,7 +48,7 @@ const Postform = () => {
     <form onSubmit={formSubmitHandler}>
       <input
         type="text"
-        defaultValue="title"
+        placeholder="title"
         onChange={(event) => {
           event.preventDefault();
           updateTitle(event.target.value);
@@ -56,7 +56,7 @@ const Postform = () => {
       />
       <input
         type="text"
-        defaultValue="description here"
+        placeholder="description here"
         onChange={(event) => {
           event.preventDefault();
           updateDescription(event.target.value);
@@ -64,7 +64,7 @@ const Postform = () => {
       />
       <input
         type="text"
-        defaultValue="price"
+        placeholder="price"
         onChange={(event) => {
           event.preventDefault();
           updatePrice(event.target.value);
@@ -72,7 +72,7 @@ const Postform = () => {
       />
       <input
         type="text"
-        defaultValue="location"
+        placeholder="location"
         onChange={(event) => {
           event.preventDefault();
           updateLocation(event.target.value);
