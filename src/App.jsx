@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import { Switch, Route, BrowserRouter, Redirect } from 'react-router-dom';
 import Login from './components/Login';
 import Navbar from './components/Navbar';
 import Posts from './components/Posts';
@@ -23,7 +23,7 @@ function App() {
           <Route exact path="/posts/:postID" component={SinglePost}/>
           <Route exact path="/posts/edit/:postID" component={EditPost}/>
           <Route path="/profile">
-            <Profile isLoggedIn={isLoggedIn} updateIsLoggedIn={updateIsLoggedIn}/>
+            {isLoggedIn ? <Profile isLoggedIn={isLoggedIn} updateIsLoggedIn={updateIsLoggedIn}/> : <Redirect path='/' />}
           </Route>
           <Route path="/login">
             <Login isLoggedIn={isLoggedIn} updateIsLoggedIn={updateIsLoggedIn}/>
