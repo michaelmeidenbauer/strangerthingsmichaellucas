@@ -6,6 +6,9 @@ import Navbar from './components/Navbar';
 import Posts from './components/Posts';
 import Register from './components/Register';
 import Profile from './components/Profile';
+import SinglePost from './components/SinglePost';
+import Postform from './components/Postform';
+import EditPost from './components/EditPost';
 
 function App() {
   const [isLoggedIn, updateIsLoggedIn] = useState(false);
@@ -15,12 +18,10 @@ function App() {
       <div className="App">
         <Navbar isLoggedIn={isLoggedIn} updateIsLoggedIn={updateIsLoggedIn}/>
         <Switch>
-          <Route exact path="/posts">
-            <Posts />
-          </Route>
-          <Route exact path="/posts/add">
-            <h1>ADD POST</h1>
-          </Route>
+          <Route exact path="/posts" component={Posts}/>
+          <Route exact path="/posts/add" component={Postform}/>
+          <Route exact path="/posts/:postID" component={SinglePost}/>
+          <Route exact path="/posts/edit/:postID" component={EditPost}/>
           <Route path="/profile">
             <Profile isLoggedIn={isLoggedIn} updateIsLoggedIn={updateIsLoggedIn}/>
           </Route>

@@ -36,7 +36,6 @@ export const loginUser = async (userName, passWord) => {
 
 export const getMyInfo = async (token) => {
   const fetchResult = await fetch(`${apiPath}users/me`, {
-    // method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
@@ -46,9 +45,15 @@ export const getMyInfo = async (token) => {
   return json;
 };
 
-export const getAllPosts = async () => {
-  const fetchResult = await fetch(`${apiPath}posts`);
+export const getAllPosts = async (token) => {
+  const fetchResult = await fetch(`${apiPath}posts`, {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  });
   const json = await fetchResult.json();
+  console.log('posts: ',json.data.posts);
   return json.data.posts;
 };
 
@@ -122,8 +127,8 @@ export const deletePost = async (title,
 };
 
 export const addMessageToPost = async (content, postID, token) => {
-  const fetchResult = await fetch(`${apiPath}posts/${postID}`, {
-    method: 'DELETE',
+  const fetchResult = await fetch(`${apiPath}posts/${postID}/messages`, {
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
