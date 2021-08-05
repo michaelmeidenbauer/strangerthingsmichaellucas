@@ -1,9 +1,15 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
 import { Link } from 'react-router-dom';
 import { getAllPosts } from '../api/api';
 import MessageSeller from './MessageSeller';
+import Loading from './Loading';
+import Message from './Message';
 
 const SinglePost = ({ match }) => {
     const [singlePost, updateSinglePost] = useState(null);
@@ -13,57 +19,95 @@ const SinglePost = ({ match }) => {
         const localToken = JSON.parse(localStorage.getItem('strangersThingsToken')) ?? null;
         const downloadedPosts = await getAllPosts(localToken);
         const singledOutPost = downloadedPosts.filter(post => post._id === currentPostId)[0];
-        updateSinglePost(singledOutPost);    
+        updateSinglePost(singledOutPost);
     }, []);
-    console.log(singlePost);
+    console.log('post deets: ', singlePost);
+
+    if (!singlePost) {
+        return (
+            <Loading
+                contentType='post details' />
+        )
+    }
+
     return (
         <>
-            {
-                singlePost &&
-                (
-                    <div className="single-post">
-                        <h1>{singlePost.title}</h1>
-                        <h3 >Seller: {singlePost.author.username} Location: {singlePost.location}</h3>
-                        <h2 style={{ color: 'red' }}>{singlePost.price}</h2>
-                        <p>{singlePost.description}</p>
-                        {
-                            singlePost.messages.length > 0 &&
-                            (
-                                <>
-                                <h4>Comments on this post:</h4>
-                                {
-                                singlePost.messages.map(message => (
-                                    <div key={message._id}>
-                                    <p>{message.content}</p>
-                                    </div>
-                                ))
-                                }
-                                </>
-                            )
-                        }
-                        <Link to={{
-                            pathname: `/posts`
-                        }}>Back to all posts</Link>
-                        <button type="button" onClick={() => updateShowMessageUI(!showMessageUI)}>Message seller</button>
-                        {
-                            showMessageUI &&
-                            <MessageSeller
-                            seller={singlePost.author.username}
-                            postID={singlePost._id}
-                            updateShowMessageUI={updateShowMessageUI}
-                            />
-                        }
-                    </div>
-                )
-            }
-            {
-                singlePost && singlePost.isAuthor &&
-                (
+            <Container>
+                <Row>
+                    <h1>{singlePost.title}</h1>
+                </Row>
+                <Row className="d.flex flex-row justify-content-center w-50 mx-auto">
+                    <h4 >Seller: {singlePost.author.username}</h4>
+                </Row>
+                <Row className="d.flex flex-row justify-content-center w-50 mx-auto">
+                    <h4>Location: {singlePost.location}</h4>
+                </Row>
+                <Row>
+                    <Col>
+                        <h4 style={{ color: 'red' }}>Price: {singlePost.price}</h4>
+                    </Col>
+                </Row>
+                <Row>
+                    <h5>Item Description:</h5>
+                    <p>{singlePost.description}</p>
+                </Row>
+
+                {
+                    singlePost.messages.length > 0
+                        &&
+                        (
+                            <>
+                                <Row className="w-50 mx-auto">
+                                    <h4>You have received {singlePost.messages.length} {singlePost.messages.length > 1 ? 'messages' : 'message'} about this post:</h4>
+                                    {
+                                        singlePost.messages.map(message => (
+                                            <Message
+                                                message={message}
+                                            />
+                                        ))
+                                    }
+                                </Row>
+                            </>
+                        )
+                }
+                <Row>
                     <Link to={{
-                        pathname: `/posts/edit/${singlePost._id}`
-                    }}>Edit/Delete Post</Link>
-                )
-            }
+                        pathname: `/posts`
+                    }}>Back to all posts</Link>
+                </Row>
+                {
+                    singlePost.isAuthor
+                    ?
+                    (
+                        <Row>
+                            <Link to={{
+                                pathname: `/posts/edit/${singlePost._id}`
+                            }}>Edit/Delete Post</Link>
+                        </Row>
+
+                    )
+                    :
+                    (
+                    <>
+                        <Row className="w-25 mx-auto mt-2">
+                            <Button type="button" onClick={() => updateShowMessageUI(!showMessageUI)}>Message seller</Button>
+                        </Row>
+                            {
+                                showMessageUI &&
+                                (
+                                    <Row>
+                                        <MessageSeller
+                                            seller={singlePost.author.username}
+                                            postID={singlePost._id}
+                                            updateShowMessageUI={updateShowMessageUI}
+                                        />
+                                    </Row>
+                                )
+                            }
+                    </>
+                    )
+                }
+            </Container>
         </>
     )
 };
