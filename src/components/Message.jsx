@@ -19,7 +19,6 @@ const Message = ({ message }) => (
 Message.propTypes = {
     message: PropTypes.shape({
         _id: PropTypes.string.isRequired,
-        title: PropTypes.string.isRequired,
         content: PropTypes.string.isRequired,
         fromUser: PropTypes.shape({
             username: PropTypes.string.isRequired,

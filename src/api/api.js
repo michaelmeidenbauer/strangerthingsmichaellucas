@@ -53,7 +53,6 @@ export const getAllPosts = async (token) => {
     },
   });
   const json = await fetchResult.json();
-  console.log('posts: ',json.data.posts);
   return json.data.posts;
 };
 

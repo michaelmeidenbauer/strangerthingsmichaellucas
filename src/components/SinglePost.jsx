@@ -21,7 +21,6 @@ const SinglePost = ({ match }) => {
         const singledOutPost = downloadedPosts.filter(post => post._id === currentPostId)[0];
         updateSinglePost(singledOutPost);
     }, []);
-    console.log('post deets: ', singlePost);
 
     if (!singlePost) {
         return (

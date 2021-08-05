@@ -16,14 +16,9 @@ const Login = (props) => {
   
   const { updateIsLoggedIn } = props;
 
-  console.log(localStorage.getItem("strangersThingsToken"))
-
-  console.log('un: ', userName, 'pw: ', passWord);
-
   const loginSubmitHandler = async (event) => {
     event.preventDefault();
     const loginResult = await loginUser(userName, passWord);
-    console.log(loginResult);
     if (loginResult.success) {
       updateLoginFail(false);
       updateLoginSuccess(true);
