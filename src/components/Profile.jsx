@@ -17,8 +17,6 @@ const Profile = () => {
     updateAllPosts(myPostsResponse);
   }, []);
 
-  console.log(allPosts);
-
   return (
     <div>
       <h2>Messages to {myInfo.username}</h2>
@@ -27,11 +25,9 @@ const Profile = () => {
           .filter((message) => message.fromUser.username !== myInfo.username)
           .map((message) => {
             const postId = message.post._id;
-            console.log(postId);
             const matchedPost = myInfo.posts.filter(
               (post) => post._id === postId
             )[0];
-            console.log(matchedPost);
             if (matchedPost && matchedPost.active) {
               return (
                 <div className="message">
@@ -52,17 +48,17 @@ const Profile = () => {
               </div>
             );
           })}
+
       <h2>Message from {myInfo.username}</h2>
       {myInfo.messages &&
         myInfo.messages
           .filter((message) => message.fromUser.username === myInfo.username)
           .map((message) => {
             const postId = message.post._id;
-            console.log(postId);
             const matchedPost = allPosts.filter(
               (post) => post._id === postId
             )[0];
-            console.log(matchedPost);
+
             if (matchedPost && matchedPost.active) {
               return (
                 <div className="message">
@@ -86,12 +82,5 @@ const Profile = () => {
     </div>
   );
 };
-
-//           <div className="message">
-//             <p>{message.content}</p>
-//             <Link to={`/posts/${message.post._id}`} ><p>Post: {message.post.title}</p> </Link>
-//           </div>
-//         )
-//         )
 
 export default Profile;
