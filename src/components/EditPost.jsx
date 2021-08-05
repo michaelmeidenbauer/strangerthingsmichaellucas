@@ -25,11 +25,15 @@ const EditPost = ({ match }) => {
     const [updateSuccess, setUpdateSuccess] = useState(false);
     const [deleteSuccess, setDeleteSuccess] = useState(false);
     const [submitFail, updateSumbitFail] = useState(false);
+    const [shouldRedirect, updateShouldRedirect] = useState(false);
     const updateOrDeleteSuccess = updateSuccess || deleteSuccess;
     console.log(currentPostId);
     useEffect(async () => {
         const localToken = JSON.parse(localStorage.getItem('strangersThingsToken')) ?? null;
         updateToken(localToken);
+        if (localToken === null) {
+          updateShouldRedirect(true);
+        }
         const downloadedPosts = await getAllPosts();
         // eslint-disable-next-line no-underscore-dangle
         const singledOutPost = downloadedPosts.filter(post => post._id === currentPostId)[0];
@@ -71,7 +75,7 @@ const EditPost = ({ match }) => {
         }
     };
 
-    if (updateOrDeleteSuccess) {
+    if (updateOrDeleteSuccess || shouldRedirect) {
         return (
             <Redirect to="/posts" />
             )
