@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import ListPost from './ListPost';
 import Loading from './Loading';
+import PostSearch from './PostSearch';
 import { getAllPosts } from '../api/api';
 
 const Posts = () => {
     const [displayPosts, updateDisplayPosts] = useState([]);
     const [allPosts, updateAllPosts] = useState(null);
-    const [searchTerm, updateSearchTerm] = useState('');
     // eslint-disable-next-line no-unused-vars
     const [token, updateToken] = useState(null);
     useEffect(async () => {
@@ -19,15 +19,7 @@ const Posts = () => {
         updateDisplayPosts(downloadedPosts);
         updateAllPosts(downloadedPosts);
     }, []);
-    const searchHandler = (event) => {
-        event.preventDefault();
-                const results = allPosts.filter(post => post.title.toLowerCase().includes(searchTerm.toLowerCase()));
-                if (searchTerm) {
-                    updateDisplayPosts(results);
-                } else {
-                    updateDisplayPosts(allPosts);
-                }
-    };
+    
 
     if (!allPosts) {
         return (
@@ -38,13 +30,10 @@ const Posts = () => {
 
     return (
         <Container className="content-align-center mx-auto">
-            <form onSubmit={searchHandler}>
-                <input type="text" onChange={event => updateSearchTerm(event.target.value)} />
-                <button type="submit">Search</button>
-                <button type="button" onClick={() => {
-                    updateDisplayPosts(allPosts);
-                    }}>Clear search</button>
-            </form>
+            <PostSearch 
+            allPosts={allPosts}
+            updateDisplayPosts={updateDisplayPosts}
+            />
             {
                 token &&
                 (<Link to={{
