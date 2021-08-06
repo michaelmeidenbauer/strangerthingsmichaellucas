@@ -1,8 +1,9 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { getMyInfo, getAllPosts } from "../api/api";
-import Loading from "./Loading"
+import Loading from "./Loading";
+import Message from "./Message";
 
 const Profile = () => {
   const [myInfo, updateMyInfo] = useState({});
@@ -19,7 +20,7 @@ const Profile = () => {
   }, []);
 
   if(!myInfo.messages || !allPosts) {
-    return <Loading contentType='messages'/>
+    return <Loading contentType='profile'/>
   }
 
   return (
@@ -35,22 +36,11 @@ const Profile = () => {
             )[0];
             if (matchedPost && matchedPost.active) {
               return (
-                <div className="message">
-                  <h3>From: {message.fromUser.username}</h3>
-                  <p>{message.content}</p>
-                  <Link to={`/posts/${postId}`}>
-                    <p>Post: {message.post.title}</p>{" "}
-                  </Link>
-                </div>
+                <Message message={message} postId={postId} />
               );
             }
             return (
-              <div className="message">
-                <h3>From: {message.fromUser.username}</h3>
-                <p>{message.content}</p>
-                <p>Post: {message.post.title}</p>
-                <p>(deleted post)</p>
-              </div>
+              <Message message={message} postId={postId} deleted/>
             );
           })}
 
@@ -66,22 +56,11 @@ const Profile = () => {
 
             if (matchedPost && matchedPost.active) {
               return (
-                <div className="message">
-                  <h3>From: {message.fromUser.username}</h3>
-                  <p>{message.content}</p>
-                  <Link to={`/posts/${postId}`}>
-                    <p>Post: {message.post.title}</p>{" "}
-                  </Link>
-                </div>
+                <Message message={message} postId={postId} />
               );
             }
             return (
-              <div className="message">
-                <h3>From: {message.fromUser.username}</h3>
-                <p>{message.content}</p>
-                <p>Post: {message.post.title}</p>
-                <p>(deleted post)</p>
-              </div>
+              <Message message={message} postId={postId} deleted/>
             );
           })}
     </div>
