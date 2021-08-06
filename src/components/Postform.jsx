@@ -107,17 +107,13 @@ const Postform = () => {
           </Col>
         </Form.Group>
 
-        <Form.Group as={Row} className="mb-3">
-          <Col sm={{ span: 10, offset: 2 }}>
+        <Form.Group as={Row} className="mb-3 w-25 mx-auto">
             <Button type="submit">Submit Post</Button>
-          </Col>
-          <Col sm={{ span: 10, offset: 2 }}>
             {
               submitFail && (
                 <p style={{ color: 'red' }}>Post submission failed. Please login or register to create posts.</p>
               )
             }
-          </Col>
         </Form.Group>
       </Form>
     </Container>

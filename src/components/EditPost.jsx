@@ -146,22 +146,18 @@ const EditPost = ({ match }) => {
           </Col>
         </Form.Group>
 
-        <Form.Group as={Row} className="mb-3">
-          <Col sm={{ span: 10, offset: 2 }}>
+        <Form.Group as={Row} className="mb-3 w-25 mx-auto">
             {
               submitFail && (
                 <p style={{ color: 'red' }}>Submission failed. Please login or register to modify posts.</p>
               )
             }
-          </Col>
-          <Col sm={{ span: 10, offset: 2 }}>
             <div className="mb-2">
               <Button type="submit">Submit Edit</Button>
             </div>
             <div>
               <Button className="ml-1" type="button" variant="danger" onClick={handleDelete}>Delete Post</Button>
             </div>
-          </Col>
         </Form.Group>
       </Form>
     </Container>

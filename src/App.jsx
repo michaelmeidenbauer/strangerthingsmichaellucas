@@ -10,6 +10,7 @@ import Profile from "./components/Profile";
 import SinglePost from "./components/SinglePost";
 import Postform from "./components/Postform";
 import EditPost from "./components/EditPost";
+import BAC from './components/BAC-fullsize.png';
 
 function App() {
   const [isLoggedIn, updateIsLoggedIn] = useState(false);
@@ -52,7 +53,8 @@ function App() {
           <Route path="/">
             {/* <Home /> */}
             <header className="App-header">
-              <h1>WELCOME TO THIS BOOTLEG-ASS CRAIGSLIST</h1>
+            <img src={BAC} className="App-logo mb-4" alt="welcome to bootleg-ass craigslist"/>
+              <h1 className="mt-4 pt-2">WELCOME TO BOOTLEG-ASS CRAIGSLIST</h1>
             </header>
           </Route>
         </Switch>
