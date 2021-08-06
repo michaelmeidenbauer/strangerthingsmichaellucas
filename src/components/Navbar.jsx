@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
@@ -7,6 +7,13 @@ or Log Out, depending on presence of user token or perhaps current user state
 */
 const Navbar = (props) => {
   const { updateIsLoggedIn, isLoggedIn } = props;
+
+  useEffect(
+    () =>
+      localStorage.getItem("strangersThingsToken") && updateIsLoggedIn(true),
+    []
+  );
+
   return (
     <div style={{ padding: "5px" }}>
       <Link to="/" style={{ padding: "5px" }}>
