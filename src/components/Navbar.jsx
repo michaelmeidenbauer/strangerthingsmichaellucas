@@ -6,15 +6,13 @@ import { Link } from "react-router-dom";
 or Log Out, depending on presence of user token or perhaps current user state
 */
 
-const smallPadding = { padding: "5px" };
-
-const Navbar = ({ updateIsLoggedIn, isLoggedIn }) => {
+const Navbar = (props) => {
+  const { updateIsLoggedIn, isLoggedIn } = props;
+  const smallPadding = { padding: "5px" };
   const onLogOutClick = () => {
     localStorage.removeItem("strangersThingsToken");
     updateIsLoggedIn(false);
   };
-const Navbar = (props) => {
-  const { updateIsLoggedIn, isLoggedIn } = props;
 
   useEffect(
     () =>
