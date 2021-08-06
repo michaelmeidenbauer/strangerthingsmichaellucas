@@ -10,14 +10,17 @@ import { getAllPosts } from '../api/api';
 const Posts = () => {
     const [displayPosts, updateDisplayPosts] = useState([]);
     const [allPosts, updateAllPosts] = useState(null);
-    // eslint-disable-next-line no-unused-vars
+    
     const [token, updateToken] = useState(null);
+
     useEffect(async () => {
-        const localToken = JSON.parse(localStorage.getItem('strangersThingsToken')) ?? null;
-        updateToken(localToken);
-        const downloadedPosts = await getAllPosts(localToken);
-        updateDisplayPosts(downloadedPosts);
-        updateAllPosts(downloadedPosts);
+      const localToken =
+        JSON.parse(localStorage.getItem("strangersThingsToken")) ?? null;
+
+      updateToken(localToken);
+      const downloadedPosts = await getAllPosts(localToken);
+      updateDisplayPosts(downloadedPosts);
+      updateAllPosts(downloadedPosts);
     }, []);
     
 

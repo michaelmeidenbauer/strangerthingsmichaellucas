@@ -5,35 +5,35 @@ import { Link } from "react-router-dom";
 /* Standard Navbar component. Need to add logic to conditionally render Log In
 or Log Out, depending on presence of user token or perhaps current user state
 */
-const Navbar = (props) => {
-  const { updateIsLoggedIn, isLoggedIn } = props;
+
+const smallPadding = { padding: "5px" };
+
+const Navbar = ({ updateIsLoggedIn, isLoggedIn }) => {
+  const onLogOutClick = () => {
+    localStorage.removeItem("strangersThingsToken");
+    updateIsLoggedIn(false);
+  };
+
   return (
-    <div style={{ padding: "5px" }}>
-      <Link to="/" style={{ padding: "5px" }}>
+    <div style={smallPadding}>
+      <Link to="/" style={smallPadding}>
         Home
       </Link>
-      <Link to="/posts" style={{ padding: "5px" }}>
+      <Link to="/posts" style={smallPadding}>
         Posts
       </Link>
-      {isLoggedIn && (
-        <Link to="/profile" style={{ padding: "5px" }}>
-          Profile
-        </Link>
-      )}
 
       {isLoggedIn ? (
-        <Link
-          to="/"
-          style={{ padding: "5px" }}
-          onClick={() => {
-            localStorage.removeItem("strangersThingsToken");
-            updateIsLoggedIn(false);
-          }}
-        >
-          Log Out
-        </Link>
+        <>
+          <Link to="/profile" style={smallPadding}>
+            Profile
+          </Link>
+          <Link to="/" style={smallPadding} onClick={onLogOutClick}>
+            Log Out
+          </Link>
+        </>
       ) : (
-        <Link to="/login" style={{ padding: "5px" }}>
+        <Link to="/login" style={smallPadding}>
           Log In
         </Link>
       )}

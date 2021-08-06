@@ -6,14 +6,24 @@ import Row from 'react-bootstrap/Row';
 
 const PostSearch = ({ allPosts, updateDisplayPosts }) => {
     const [searchTerm, updateSearchTerm] = useState('');
+
     const searchHandler = (event) => {
-        event.preventDefault();
-        const results = allPosts.filter(post => post.title.toLowerCase().includes(searchTerm.toLowerCase()) || post.description.toLowerCase().includes(searchTerm.toLowerCase()));
-        if (searchTerm) {
-            updateDisplayPosts(results);
-        } else {
-            updateDisplayPosts(allPosts);
-        }
+      event.preventDefault();
+
+      const results = allPosts.filter((post) => {
+        const doesTitleMatch = post.title
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase());
+        const doesDescriptionMatch = post.description
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase());
+
+        return doesTitleMatch || doesDescriptionMatch;
+      });
+
+      if (searchTerm) updateDisplayPosts(results);
+      else updateDisplayPosts(allPosts);
+      //   updateDisplayPosts(searchTerm ? results : allPosts);
     };
 
     return (

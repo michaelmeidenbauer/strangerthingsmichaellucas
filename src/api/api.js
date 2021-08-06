@@ -1,27 +1,37 @@
 const apiPath = 'https://strangers-things.herokuapp.com/api/2104-web-pt/';
 
+/**
+ * This function takes in a users creds and gives back a users token
+ * @param {*} userName 
+ * @param {*} passWord 
+ * @returns 
+ */
 export const registerUser = async (userName, passWord) => {
-  const fetchResult = await fetch(`${apiPath}users/register`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
+  const body = {
+    user: {
+      username: userName,
+      password: passWord,
     },
-    body: JSON.stringify({
-      user: {
-        username: userName,
-        password: passWord,
-      },
-    }),
-  });
+  };
+
+  const config = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  };
+
+  const fetchResult = await fetch(`${apiPath}users/register`, config);
   const json = await fetchResult.json();
   return json;
 };
 
 export const loginUser = async (userName, passWord) => {
   const fetchResult = await fetch(`${apiPath}users/login`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
       user: {
@@ -37,7 +47,7 @@ export const loginUser = async (userName, passWord) => {
 export const getMyInfo = async (token) => {
   const fetchResult = await fetch(`${apiPath}users/me`, {
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
   });
@@ -46,12 +56,15 @@ export const getMyInfo = async (token) => {
 };
 
 export const getAllPosts = async (token) => {
+  // If token exists, add authorization to fetch body, else skip
+
   const fetchResult = await fetch(`${apiPath}posts`, {
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
   });
+
   const json = await fetchResult.json();
   return json.data.posts;
 };
