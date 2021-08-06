@@ -53,8 +53,8 @@ function App() {
           <Route path="/">
             {/* <Home /> */}
             <header className="App-header">
-            <img src={BAC} className="App-logo mb-4" alt="welcome to bootleg-ass craigslist"/>
-              <h1 className="mt-4 pt-2">WELCOME TO BOOTLEG-ASS CRAIGSLIST</h1>
+            <img src={BAC} className="App-logo mb-2" alt="welcome to bootleg-ass craigslist"/>
+              <h1 className="mt-2">WELCOME TO BOOTLEG-ASS CRAIGSLIST</h1>
             </header>
           </Route>
         </Switch>
