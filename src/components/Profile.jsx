@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getMyInfo, getAllPosts } from "../api/api";
+import Loading from "./Loading"
 
 const Profile = () => {
   const [myInfo, updateMyInfo] = useState({});
@@ -17,6 +18,10 @@ const Profile = () => {
     updateAllPosts(myPostsResponse);
   }, []);
 
+  if(!myInfo.messages || !allPosts) {
+    return <Loading contentType='messages'/>
+  }
+
   return (
     <div>
       <h2>Messages to {myInfo.username}</h2>
@@ -28,7 +33,7 @@ const Profile = () => {
             const matchedPost = myInfo.posts.filter(
               (post) => post._id === postId
             )[0];
-            if (matchedPost && matchedPost.active) {
+            if (matchedPost.active) {
               return (
                 <div className="message">
                   <h3>From: {message.fromUser.username}</h3>
@@ -59,7 +64,7 @@ const Profile = () => {
               (post) => post._id === postId
             )[0];
 
-            if (matchedPost && matchedPost.active) {
+            if (matchedPost.active) {
               return (
                 <div className="message">
                   <h3>From: {message.fromUser.username}</h3>
