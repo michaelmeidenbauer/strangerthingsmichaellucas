@@ -16,14 +16,9 @@ const Login = (props) => {
   
   const { updateIsLoggedIn } = props;
 
-  console.log(localStorage.getItem("strangersThingsToken"))
-
-  console.log('un: ', userName, 'pw: ', passWord);
-
   const loginSubmitHandler = async (event) => {
     event.preventDefault();
     const loginResult = await loginUser(userName, passWord);
-    console.log(loginResult);
     if (loginResult.success) {
       updateLoginFail(false);
       updateLoginSuccess(true);
@@ -41,7 +36,7 @@ const Login = (props) => {
     <form onSubmit={loginSubmitHandler}>
       <input
         type="text"
-        defaultValue="enter username here"
+        placeholder="username"
         onChange={(event) => {
           event.preventDefault();
           updateUsername(event.target.value);
@@ -49,7 +44,7 @@ const Login = (props) => {
       />
       <input
         type="password"
-        defaultValue="enter password here"
+        placeholder="password"
         onChange={(event) => {
           event.preventDefault();
           updatePassword(event.target.value);
