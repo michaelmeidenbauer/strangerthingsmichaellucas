@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
-import Row from 'react-bootstrap/Row'
+import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -76,26 +76,35 @@ const Postform = () => {
         </Form.Group>
 
         <Form.Group as={Row} className="mb-3" controlId="Location">
-          <Form.Label column sm={2}>
+          <Form.Label column lg={2}>
             Location
           </Form.Label>
-          <Col sm={10} className="align-items-center">
+          <Col lg={8} className="align-items-center">
             <Form.Control type="text" placeholder="Location" onChange={(event) => {
               event.preventDefault();
               updateLocation(event.target.value);
             }} />
-          <Form.Check label="Will deliver?" type="checkbox" onChange={() => {
-            updateWillDeliver(!willDeliver);
-          }} />
+          </Col>
+          <Col lg={2 }>
+          <Form.Label>
+            Will deliver?
+          </Form.Label>
+            <Form.Check type="checkbox" defaultChecked={false} onChange={(event) => {
+              updateWillDeliver(event.target.checked);
+            }} />
           </Col>
         </Form.Group>
-        
-        <Form.Group className="mb-3" controlId="Description">
-          <Form.Label>Description</Form.Label>
-          <Form.Control as="textarea" rows={3} onChange={(event) => {
+
+        <Form.Group as={Row} className="mb-3" controlId="Description">
+          <Col lg={2}>
+          <Form.Label column >Description</Form.Label>
+          </Col>
+          <Col lg={10}>
+          <Form.Control as="textarea" onChange={(event) => {
             event.preventDefault();
             updateDescription(event.target.value);
           }} />
+          </Col>
         </Form.Group>
 
         <Form.Group as={Row} className="mb-3">

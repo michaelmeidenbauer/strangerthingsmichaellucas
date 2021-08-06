@@ -2,7 +2,6 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import { Link } from 'react-router-dom';
@@ -39,12 +38,10 @@ const SinglePost = ({ match }) => {
                     <h4 >Seller: {singlePost.author.username}</h4>
                 </Row>
                 <Row className="d.flex flex-row justify-content-center w-50 mx-auto">
-                    <h4>Location: {singlePost.location}</h4>
+                    <h4>Location: {singlePost.location} ({singlePost.willDeliver ? 'Seller will deliver' : 'Seller will not deliver'})</h4>
                 </Row>
                 <Row>
-                    <Col>
                         <h4 style={{ color: 'red' }}>Price: {singlePost.price}</h4>
-                    </Col>
                 </Row>
                 <Row>
                     <h5>Item Description:</h5>
