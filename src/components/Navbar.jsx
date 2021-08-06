@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
@@ -13,6 +13,14 @@ const Navbar = ({ updateIsLoggedIn, isLoggedIn }) => {
     localStorage.removeItem("strangersThingsToken");
     updateIsLoggedIn(false);
   };
+const Navbar = (props) => {
+  const { updateIsLoggedIn, isLoggedIn } = props;
+
+  useEffect(
+    () =>
+      localStorage.getItem("strangersThingsToken") && updateIsLoggedIn(true),
+    []
+  );
 
   return (
     <div style={smallPadding}>
