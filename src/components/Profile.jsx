@@ -33,7 +33,7 @@ const Profile = () => {
             const matchedPost = myInfo.posts.filter(
               (post) => post._id === postId
             )[0];
-            if (matchedPost.active) {
+            if (matchedPost && matchedPost.active) {
               return (
                 <div className="message">
                   <h3>From: {message.fromUser.username}</h3>
@@ -64,7 +64,7 @@ const Profile = () => {
               (post) => post._id === postId
             )[0];
 
-            if (matchedPost.active) {
+            if (matchedPost && matchedPost.active) {
               return (
                 <div className="message">
                   <h3>From: {message.fromUser.username}</h3>
