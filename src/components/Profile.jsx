@@ -1,5 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState } from "react";
+import Container from "react-bootstrap/Container";
+import Accordion from "react-bootstrap/Accordion";
 import { getMyInfo, getAllPosts } from "../api/api";
 import Loading from "./Loading";
 import Message from "./Message";
@@ -18,51 +20,60 @@ const Profile = () => {
     updateAllPosts(myPostsResponse);
   }, []);
 
-  if(!myInfo.messages || !allPosts) {
-    return <Loading contentType='profile'/>
+  if (!myInfo.messages || !allPosts) {
+    return <Loading contentType="profile" />;
   }
 
   return (
-    <div>
-      <h2>Messages to {myInfo.username}</h2>
-      {myInfo.messages &&
-        myInfo.messages
-          .filter((message) => message.fromUser.username !== myInfo.username)
-          .map((message) => {
-            const postId = message.post._id;
-            const matchedPost = myInfo.posts.filter(
-              (post) => post._id === postId
-            )[0];
-            if (matchedPost && matchedPost.active) {
-              return (
-                <Message message={message} postId={postId} />
-              );
-            }
-            return (
-              <Message message={message} postId={postId} deleted/>
-            );
-          })}
+    <Container className="content-align-center mx-auto mt-3">
+      <div>
+        <h2>Messages</h2>
+        <Accordion defaultActiveKey="0" className='block border border-light'>
+          <Accordion.Header>Messages to {myInfo.username}</Accordion.Header>
+          {/* <h2>Messages to {myInfo.username}</h2> */}
+          <Accordion.Body>
+            {myInfo.messages &&
+              myInfo.messages
+                .filter(
+                  (message) => message.fromUser.username !== myInfo.username
+                )
+                .map((message) => {
+                  const postId = message.post._id;
+                  const matchedPost = myInfo.posts.filter(
+                    (post) => post._id === postId
+                  )[0];
+                  if (matchedPost && matchedPost.active) {
+                    return <Message message={message} postId={postId} />;
+                  }
+                  return <Message message={message} postId={postId} deleted />;
+                })}
+          </Accordion.Body>
+        </Accordion>
 
-      <h2>Message from {myInfo.username}</h2>
-      {myInfo.messages &&
-        myInfo.messages
-          .filter((message) => message.fromUser.username === myInfo.username)
-          .map((message) => {
-            const postId = message.post._id;
-            const matchedPost = allPosts.filter(
-              (post) => post._id === postId
-            )[0];
+        <Accordion className='block border border-light'>
+          <Accordion.Header>Messages from {myInfo.username}</Accordion.Header>
+          {/* <h2>Message from {myInfo.username}</h2> */}
+          <Accordion.Body>
+            {myInfo.messages &&
+              myInfo.messages
+                .filter(
+                  (message) => message.fromUser.username === myInfo.username
+                )
+                .map((message) => {
+                  const postId = message.post._id;
+                  const matchedPost = allPosts.filter(
+                    (post) => post._id === postId
+                  )[0];
 
-            if (matchedPost && matchedPost.active) {
-              return (
-                <Message message={message} postId={postId} />
-              );
-            }
-            return (
-              <Message message={message} postId={postId} deleted/>
-            );
-          })}
-    </div>
+                  if (matchedPost && matchedPost.active) {
+                    return <Message message={message} postId={postId} />;
+                  }
+                  return <Message message={message} postId={postId} deleted />;
+                })}
+          </Accordion.Body>
+        </Accordion>
+      </div>
+    </Container>
   );
 };
 
