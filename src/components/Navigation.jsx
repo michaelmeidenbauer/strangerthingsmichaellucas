@@ -5,6 +5,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import { LinkContainer } from "react-router-bootstrap";
+import BAC from "../images/BAC.png";
 
 /* Standard Navbar component. Need to add logic to conditionally render Log In
 or Log Out, depending on presence of user token or perhaps current user state
@@ -19,11 +20,23 @@ const Navigation = (props) => {
   );
 
   return (
-    <Navbar collapseOnSelect expand="sm" bg="light" variant='light'>
+    <Navbar collapseOnSelect expand="sm" bg="light" variant="light">
       <Container>
+        <LinkContainer to="/">
+          <Navbar.Brand>
+            <img
+              // eslint-disable-next-line global-require
+              src={BAC}
+              alt="logo"
+              width="30px"
+              height="auto"
+              className="d-inline-block align-top"
+            />{" "}
+          </Navbar.Brand>
+        </LinkContainer>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className='me-auto'>
+          <Nav className="me-auto">
             <LinkContainer to="/">
               <Nav.Link>Home</Nav.Link>
             </LinkContainer>
