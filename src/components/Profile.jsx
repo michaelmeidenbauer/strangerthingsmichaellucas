@@ -1,6 +1,5 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState } from "react";
-// import { Link } from "react-router-dom";
 import { getMyInfo, getAllPosts } from "../api/api";
 import Loading from "./Loading";
 import Message from "./Message";
