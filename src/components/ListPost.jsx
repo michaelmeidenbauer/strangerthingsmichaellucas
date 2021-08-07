@@ -14,7 +14,7 @@ const ListPosts = ({ post }) => (
     //     <h4>Asking price: {post.price}</h4>
     //     <p>{post.description}</p>
     // </div>
-    <Card key={post._id}>
+    <Card key={post._id} className='border'>
         <Card.Body>
             <Link to={{
                 pathname: `/posts/${post._id}`
