@@ -9,6 +9,7 @@ import SinglePost from './components/SinglePost';
 import Postform from './components/Postform';
 import EditPost from './components/EditPost';
 import Navigation from './components/Navigation';
+import BAC from "./images/BAC.png";
 
 
 function App() {
@@ -34,6 +35,13 @@ function App() {
           <Route path="/">
             <header className="App-header">
               <h1>WELCOME TO THIS BOOTLEG-ASS CRAIGSLIST</h1>
+              <img
+              src={BAC}
+              alt="logo"
+              width="200px"
+              height="auto"
+              className="d-inline-block align-top"
+            />
             </header>
           </Route>
         </Switch>
