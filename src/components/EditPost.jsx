@@ -89,7 +89,7 @@ const EditPost = ({ match }) => {
   }
 
   return (
-    <Container>
+    <Container className="mt-3">
       <Form onSubmit={formSubmitHandler}>
         <Form.Group as={Row} className="mb-3" controlId="Title">
           <Form.Label column sm={2}>
