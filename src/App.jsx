@@ -25,7 +25,6 @@ function App() {
           <Route exact path="/posts/:postID" component={SinglePost}/>
           <Route exact path="/posts/edit/:postID" component={EditPost}/>
           <Route path="/profile">
-            {console.log(isLoggedIn)}
             {isLoggedIn ? <Profile isLoggedIn={isLoggedIn} updateIsLoggedIn={updateIsLoggedIn}/> : <Redirect to='/' />}
           </Route>
           <Route path="/login">
