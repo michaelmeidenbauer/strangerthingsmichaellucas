@@ -15,10 +15,8 @@ const Register = (props) => {
   const registerSubmitHandler = async (event) => {
     event.preventDefault();
     const registerResponse = await registerUser(userName, passWord);
-    console.log(registerResponse);
 
     if (registerResponse.success) {
-      console.log(registerResponse);
       updateRegisterSuccess(true);
       updateRegisterFail(false);
       updateIsLoggedIn(true);

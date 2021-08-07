@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import { Switch, Route, BrowserRouter, Redirect } from 'react-router-dom';
 import Login from './components/Login';
-import Navbar from './components/Navbar';
+import NavBar from './components/NavBar';
 import Posts from './components/Posts';
 import Register from './components/Register';
 import Profile from './components/Profile';
@@ -16,7 +16,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <Navbar isLoggedIn={isLoggedIn} updateIsLoggedIn={updateIsLoggedIn}/>
+        <NavBar isLoggedIn={isLoggedIn} updateIsLoggedIn={updateIsLoggedIn}/>
         <Switch>
           <Route exact path="/posts" component={Posts}/>
           <Route exact path="/posts/add" component={Postform}/>

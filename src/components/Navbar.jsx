@@ -1,11 +1,15 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import Navbar from "react-bootstrap/Navbar";
+// import Container from "react-bootstrap/Container";
+// import Nav from "react-bootstrap/Nav";
+import NavLink from "react-bootstrap/NavLink";
 
 /* Standard Navbar component. Need to add logic to conditionally render Log In
 or Log Out, depending on presence of user token or perhaps current user state
 */
-const Navbar = (props) => {
+const NavBar = (props) => {
   const { updateIsLoggedIn, isLoggedIn } = props;
 
   useEffect(
@@ -15,42 +19,35 @@ const Navbar = (props) => {
   );
 
   return (
-    <div style={{ padding: "5px" }}>
-      <Link to="/" style={{ padding: "5px" }}>
-        Home
-      </Link>
-      <Link to="/posts" style={{ padding: "5px" }}>
-        Posts
-      </Link>
-      {isLoggedIn && (
-        <Link to="/profile" style={{ padding: "5px" }}>
-          Profile
-        </Link>
-      )}
+    // <Container>
+      <Navbar className='content-align-center mx-auto'>
+        {/* <Container> */}
+          <NavLink href="/">Home</NavLink>
+          <NavLink href="/posts">Posts</NavLink>
+          {isLoggedIn && <NavLink href="/profile">Profile</NavLink>}
 
-      {isLoggedIn ? (
-        <Link
-          to="/"
-          style={{ padding: "5px" }}
-          onClick={() => {
-            localStorage.removeItem("strangersThingsToken");
-            updateIsLoggedIn(false);
-          }}
-        >
-          Log Out
-        </Link>
-      ) : (
-        <Link to="/login" style={{ padding: "5px" }}>
-          Log In
-        </Link>
-      )}
-    </div>
+          {isLoggedIn ? (
+            <NavLink
+              href="/"
+              onClick={() => {
+                localStorage.removeItem("strangersThingsToken");
+                updateIsLoggedIn(false);
+              }}
+            >
+              Log Out
+            </NavLink>
+          ) : (
+            <NavLink href="/login">Log In</NavLink>
+          )}
+        {/* </Container> */}
+      </Navbar>
+    // </Container>
   );
 };
 
-Navbar.propTypes = {
+NavBar.propTypes = {
   updateIsLoggedIn: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
 };
 
-export default Navbar;
+export default NavBar;
