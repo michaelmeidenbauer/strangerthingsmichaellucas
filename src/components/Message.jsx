@@ -7,7 +7,7 @@ import Card from "react-bootstrap/Card";
 const Message = ({ message, postId = null, deleted = false }) =>
   // eslint-disable-next-line no-nested-ternary
   postId && deleted ? (
-    <Card key={message._id}>
+    <Card key={message._id} className="border">
       <Card.Body>
         <Card.Title>From {message.fromUser.username}:</Card.Title>
         <Card.Text>{message.content}</Card.Text>
@@ -16,7 +16,7 @@ const Message = ({ message, postId = null, deleted = false }) =>
       </Card.Body>
     </Card>
   ) : postId ? (
-    <Card key={message._id}>
+    <Card key={message._id} className="border">
       <Card.Body>
         <Card.Title>From {message.fromUser.username}:</Card.Title>
         <Card.Text>{message.content}</Card.Text>
@@ -26,7 +26,7 @@ const Message = ({ message, postId = null, deleted = false }) =>
       </Card.Body>
     </Card>
   ) : (
-    <Card key={message._id}>
+    <Card key={message._id} className="border">
       <Card.Body>
         <Card.Title>From {message.fromUser.username}:</Card.Title>
         <Card.Text>{message.content}</Card.Text>
