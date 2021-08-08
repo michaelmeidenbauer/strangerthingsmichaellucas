@@ -49,10 +49,10 @@ const Profile = (props) => {
                       (post) => post._id === postId
                     )[0];
                     if (matchedPost && matchedPost.active) {
-                      return <Message message={message} postId={postId} />;
+                      return <Message key={postId} message={message} postId={postId} />;
                     }
                     return (
-                      <Message message={message} postId={postId} deleted />
+                      <Message key={postId} message={message} postId={postId} deleted />
                     );
                   })}
             </Accordion.Body>

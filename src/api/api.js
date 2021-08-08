@@ -131,7 +131,7 @@ export const createPost = async (title, description, price, location, willDelive
 };
 
 /**
- * 
+ * This function takes in details about an existing post and uses the patch method to update that post in the database. Requires an authentication token.
  * @param {string} title Post title as updated in the EditPost component at /posts/edit/<postID>
  * @param {string} description Post description as updated in the EditPost component at /posts/edit/<postID>
  * @param {string} price Post title as updated in the EditPost component at /posts/edit/<postID>
@@ -167,7 +167,7 @@ export const editPost = async (title, description, price, location, willDeliver,
 };
 
 /**
- * 
+ * This function takes in post details and uses the delete method to remove a post from the database (non destructively, the post is set inactive in the database). Requires an authentication token.
  * @param {string} title the title of the post
  * @param {string} description the description of the post
  * @param {string} price the price of the post item
@@ -210,7 +210,7 @@ export const deletePost = async (title,
 };
 
 /**
- * 
+ * This function takes in text content, a post ID, and authentication token to attach a new message to an existing post in the database.
  * @param {string} content the content of the message as entered by the user
  * @param {string} postID the ID of the post that the message should be attached to
  * @param {string} token the user's JWT

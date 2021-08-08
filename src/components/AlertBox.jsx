@@ -8,13 +8,13 @@ const AlertBox = ({ alertType }) => (
         {
             alertType === 'success'
                 ? (
-                    <Alert variant='success'>
+                    <Alert variant='success' className='mx-auto mt-2'>
                         Message sent!
                     </Alert>
                 )
                 :
                 (
-                    <Alert variant='warning'>
+                    <Alert variant='warning' className='mx-auto mt-2'>
                         Only registered users can send messages. <Link to={{
                             pathname: `/login`
                         }}>Please sign up or log in.</Link>

@@ -39,7 +39,7 @@ const MessageSeller = ({ seller, postID, updateShowMessageUI }) => {
 
     return (
         <>
-        <Card className="mt-2 w-75 mx-auto">
+        <Card className="mt-2 w-75 mx-auto p-4">
             <Card.Title>Message to {seller}:</Card.Title>
             <Form onSubmit={handleMessageSubmit}>
             <Row>
@@ -49,7 +49,6 @@ const MessageSeller = ({ seller, postID, updateShowMessageUI }) => {
             <Button type="submit">Send Message</Button>
             </Row>
             </Form>
-        </Card>
         {
             showAlert &&
             (
@@ -58,6 +57,7 @@ const MessageSeller = ({ seller, postID, updateShowMessageUI }) => {
                 />
             )
         }
+        </Card>
         </>
     )
 };
