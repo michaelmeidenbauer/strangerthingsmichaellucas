@@ -70,43 +70,53 @@ export const getAllPosts = async (token) => {
 };
 
 export const createPost = async (title, description, price, location, willDeliver, token) => {
-  const fetchResult = await fetch(`${apiPath}posts`, {
+
+  const body = {
+    post: {
+      title,
+      description,
+      price,
+      location,
+      willDeliver,
+    },
+  };
+
+  const config = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({
-      post: {
-        title,
-        description,
-        price,
-        location,
-        willDeliver,
-      },
-    }),
-  });
+    body: JSON.stringify(body),
+  };
+  
+  const fetchResult = await fetch(`${apiPath}posts`, config);
   const json = await fetchResult.json();
   return json;
 };
 
 export const editPost = async (title, description, price, location, willDeliver, token, postID) => {
-  const fetchResult = await fetch(`${apiPath}posts/${postID}`, {
+
+  const body = {
+    post: {
+      title,
+      description,
+      price,
+      location,
+      willDeliver,
+    },
+  };
+
+  const config = {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({
-      post: {
-        title,
-        description,
-        price,
-        location,
-        willDeliver,
-      },
-    }),
-  });
+    body: JSON.stringify(body),
+  };
+
+  const fetchResult = await fetch(`${apiPath}posts/${postID}`, config);
   const json = await fetchResult.json();
   return json;
 };
@@ -118,39 +128,50 @@ export const deletePost = async (title,
   willDeliver,
   token,
   postID) => {
-  const fetchResult = await fetch(`${apiPath}posts/${postID}`, {
-    method: 'DELETE',
+  const body = {
+    post: {
+      title,
+      description,
+      price,
+      location,
+      willDeliver,
+    },
+  };
+
+  const config = {
+    method: "DELETE",
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({
-      post: {
-        title,
-        description,
-        price,
-        location,
-        willDeliver,
-      },
-    }),
-  });
+    body: JSON.stringify(body),
+  };
+
+
+
+  const fetchResult = await fetch(`${apiPath}posts/${postID}`, config);
   const json = await fetchResult.json();
   return json;
 };
 
 export const addMessageToPost = async (content, postID, token) => {
-  const fetchResult = await fetch(`${apiPath}posts/${postID}/messages`, {
-    method: 'POST',
+  const body = {
+    message: {
+      content,
+    },
+  };
+
+  const config = {
+    method: "POST",
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({
-      message: {
-        content,
-      },
-    }),
-  });
+    body: JSON.stringify(body),
+  };
+
+
+  const fetchResult = await fetch(`${apiPath}posts/${postID}/messages`, config);
   const json = await fetchResult.json();
   return json;
 };
