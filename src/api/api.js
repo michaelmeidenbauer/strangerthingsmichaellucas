@@ -2,8 +2,8 @@ const apiPath = 'https://strangers-things.herokuapp.com/api/2104-web-pt/';
 
 /**
  * This function takes in a users creds and gives back a users token
- * @param {*} userName 
- * @param {*} passWord 
+ * @param {string} userName 
+ * @param {string} passWord 
  * @returns 
  */
 export const registerUser = async (userName, passWord) => {
@@ -30,8 +30,8 @@ export const registerUser = async (userName, passWord) => {
 /**
  * This function takes in a username and password and returns a success/failure
  * message, along with an authentication token upon successful login
- * @param {*} userName 
- * @param {*} passWord 
+ * @param {string} userName 
+ * @param {string} passWord 
  * @returns 
  */
 export const loginUser = async (userName, passWord) => {
@@ -59,7 +59,7 @@ export const loginUser = async (userName, passWord) => {
  * This function takes in an authentication token and returns a user object,
  * which contains a 'posts' array of post objects, a 'messages' array of message
  * objects, the unique user '_id', and  the 'username'.
- * @param {*} token 
+ * @param {string} token 
  * @returns 
  */
 export const getMyInfo = async (token) => {
@@ -77,7 +77,7 @@ export const getMyInfo = async (token) => {
 /**
  * This functions takes in an authentication token and returns 'posts'
  * array of post objects. This includes all posts.
- * @param {*} token 
+ * @param {string} token 
  * @returns 
  */
 export const getAllPosts = async (token) => {
@@ -98,12 +98,12 @@ export const getAllPosts = async (token) => {
  * a post _id, author object, description, isAuthor boolean, location,
  * message (array of message objects), price, title, willDeliver boolean,
  * active boolean, and createdAt and updatedAt time stamps.
- * @param {*} title 
- * @param {*} description 
- * @param {*} price 
- * @param {*} location 
- * @param {*} willDeliver 
- * @param {*} token 
+ * @param {string} title 
+ * @param {string} description 
+ * @param {string} price 
+ * @param {string} location 
+ * @param {boolean} willDeliver 
+ * @param {string} token 
  * @returns 
  */
 export const createPost = async (title, description, price, location, willDeliver, token) => {
