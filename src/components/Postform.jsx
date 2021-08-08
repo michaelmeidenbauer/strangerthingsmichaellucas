@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
 import {
   createPost,
 } from '../api/api';
+
 
 const Postform = () => {
   const [title, updateTitle] = useState(null);
@@ -13,10 +19,10 @@ const Postform = () => {
   const [token, updateToken] = useState(null);
   const [submitSuccess, updateSubmitSuccess] = useState(false);
   const [submitFail, updateSubmitFail] = useState(false);
-    useEffect(() => {
-        const localToken = JSON.parse(localStorage.getItem('strangersThingsToken')) ?? null;
-        updateToken(localToken);
-    }, []);
+  useEffect(() => {
+    const localToken = JSON.parse(localStorage.getItem('strangersThingsToken')) ?? null;
+    updateToken(localToken);
+  }, []);
 
   const formSubmitHandler = async (event) => {
     event.preventDefault();
@@ -31,10 +37,11 @@ const Postform = () => {
       );
       if (postCreationSuccess.success) {
         updateSubmitSuccess(true);
-    } else {
-      updateSubmitFail(true);
-    }
+      } else {
+        updateSubmitFail(true);
+      }
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error(error);
     }
   };
@@ -44,63 +51,73 @@ const Postform = () => {
   }
 
   return (
-    <>
-    <form onSubmit={formSubmitHandler}>
-      <input
-        type="text"
-        defaultValue="title"
-        onChange={(event) => {
-          event.preventDefault();
-          updateTitle(event.target.value);
-        }}
-      />
-      <input
-        type="text"
-        defaultValue="description here"
-        onChange={(event) => {
-          event.preventDefault();
-          updateDescription(event.target.value);
-        }}
-      />
-      <input
-        type="text"
-        defaultValue="price"
-        onChange={(event) => {
-          event.preventDefault();
-          updatePrice(event.target.value);
-        }}
-      />
-      <input
-        type="text"
-        defaultValue="location"
-        onChange={(event) => {
-          event.preventDefault();
-          updateLocation(event.target.value);
-        }}
-      />
-      <div className="checkbox">
-      <span>Will deliver?</span>
-      <input
-        type="checkbox"
-        defaultValue="will deliver"
-        name="willDeliver?"
-        onChange={() => {
-          updateWillDeliver(!willDeliver);
-        }}
-      />
-      </div>
-      <button
-        type="submit"
-      >
-        Submit
-      </button>
-    </form>
-    {
-      submitFail && (
-        <p style={{color: 'red'}}>Post submission failed. Please login or register to create posts.</p>
-      )
-    }
-    </>
+    <Container className="mt-3">
+      <Form onSubmit={formSubmitHandler}>
+        <Form.Group as={Row} className="mb-3" controlId="Title">
+          <Form.Label column sm={2}>
+            Post Title
+    </Form.Label>
+          <Col sm={10}>
+            <Form.Control size="lg" type="text" placeholder="Title" onChange={(event) => {
+              event.preventDefault();
+              updateTitle(event.target.value);
+            }} />
+          </Col>
+        </Form.Group>
+        <Form.Group as={Row} className="mb-3" controlId="Price">
+          <Form.Label column sm={2}>
+            Price
+    </Form.Label>
+          <Col sm={10}>
+            <Form.Control type="text" placeholder="Price" onChange={(event) => {
+              event.preventDefault();
+              updatePrice(event.target.value);
+            }} />
+          </Col>
+        </Form.Group>
+
+        <Form.Group as={Row} className="mb-3" controlId="Location">
+          <Form.Label column lg={2}>
+            Location
+          </Form.Label>
+          <Col lg={8} className="align-items-center">
+            <Form.Control type="text" placeholder="Location" onChange={(event) => {
+              event.preventDefault();
+              updateLocation(event.target.value);
+            }} />
+          </Col>
+          <Col lg={2 }>
+          <Form.Label>
+            Will deliver?
+          </Form.Label>
+            <Form.Check type="checkbox" defaultChecked={false} onChange={(event) => {
+              updateWillDeliver(event.target.checked);
+            }} />
+          </Col>
+        </Form.Group>
+
+        <Form.Group as={Row} className="mb-3" controlId="Description">
+          <Col lg={2}>
+          <Form.Label column >Description</Form.Label>
+          </Col>
+          <Col lg={10}>
+          <Form.Control as="textarea" onChange={(event) => {
+            event.preventDefault();
+            updateDescription(event.target.value);
+          }} />
+          </Col>
+        </Form.Group>
+
+        <Form.Group as={Row} className="mb-3 w-25 mx-auto">
+            <Button type="submit">Submit Post</Button>
+            {
+              submitFail && (
+                <p style={{ color: 'red' }}>Post submission failed. Please login or register to create posts.</p>
+              )
+            }
+        </Form.Group>
+      </Form>
+    </Container>
   );
 };
 

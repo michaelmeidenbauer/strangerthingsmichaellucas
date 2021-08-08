@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import './App.css';
-import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import { Switch, Route, BrowserRouter, Redirect } from 'react-router-dom';
 import Login from './components/Login';
-import Navbar from './components/Navbar';
 import Posts from './components/Posts';
-import Register from './components/Register';
 import Profile from './components/Profile';
 import SinglePost from './components/SinglePost';
 import Postform from './components/Postform';
 import EditPost from './components/EditPost';
+import Navigation from './components/Navigation';
+import BACFullsize from './images/BAC-fullsize.png';
+
 
 function App() {
   const [isLoggedIn, updateIsLoggedIn] = useState(false);
@@ -16,26 +17,24 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <Navbar isLoggedIn={isLoggedIn} updateIsLoggedIn={updateIsLoggedIn}/>
+        <Navigation isLoggedIn={isLoggedIn} updateIsLoggedIn={updateIsLoggedIn}/>
         <Switch>
-          <Route exact path="/posts" component={Posts}/>
-          <Route exact path="/posts/add" component={Postform}/>
-          <Route exact path="/posts/:postID" component={SinglePost}/>
-          <Route exact path="/posts/edit/:postID" component={EditPost}/>
+          <Route exact path="/posts" component={Posts} />
+          <Route exact path="/posts/add" component={Postform} />
+          <Route exact path="/posts/:postID" component={SinglePost} />
+          <Route exact path="/posts/edit/:postID" component={EditPost} />
+
           <Route path="/profile">
-            <Profile isLoggedIn={isLoggedIn} updateIsLoggedIn={updateIsLoggedIn}/>
+            {isLoggedIn ? <Profile isLoggedIn={isLoggedIn} updateIsLoggedIn={updateIsLoggedIn}/> : <Redirect to='/' />}
           </Route>
+
           <Route path="/login">
-            <Login isLoggedIn={isLoggedIn} updateIsLoggedIn={updateIsLoggedIn}/>
-            <Register isLoggedIn={isLoggedIn} updateIsLoggedIn={updateIsLoggedIn}/>
-          </Route>
-          <Route path="/register">
-            {/* <Register /> */}
+            <Login updateIsLoggedIn={updateIsLoggedIn}/>
           </Route>
           <Route path="/">
-            {/* <Home /> */}
             <header className="App-header">
-              <h1>MICHAEL AND LUCAS RULE</h1>
+            <img src={BACFullsize} className="App-logo mb-3" alt="welcome to bootleg-ass craigslist"/>
+              <h1 className="mt-3">WELCOME TO BOOTLEG-ASS CRAIGSLIST</h1>
             </header>
           </Route>
         </Switch>

@@ -15,10 +15,8 @@ const Register = (props) => {
   const registerSubmitHandler = async (event) => {
     event.preventDefault();
     const registerResponse = await registerUser(userName, passWord);
-    console.log(registerResponse);
 
     if (registerResponse.success) {
-      console.log(registerResponse);
       updateRegisterSuccess(true);
       updateRegisterFail(false);
       updateIsLoggedIn(true);
@@ -34,7 +32,8 @@ const Register = (props) => {
   };
   return (
     <div>
-      <h1>Set up your account</h1>
+      <h4>New to BAC?</h4>
+      <p>Register your account here:</p>
       <form onSubmit={registerSubmitHandler}>
         <input
           type="text"
