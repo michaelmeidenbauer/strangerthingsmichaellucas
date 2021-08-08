@@ -23,7 +23,6 @@ const PostSearch = ({ allPosts, updateDisplayPosts }) => {
 
       if (searchTerm) updateDisplayPosts(results);
       else updateDisplayPosts(allPosts);
-      //   updateDisplayPosts(searchTerm ? results : allPosts);
     };
 
     return (
