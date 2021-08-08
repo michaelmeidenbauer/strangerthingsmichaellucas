@@ -3,7 +3,6 @@ import './App.css';
 import { Switch, Route, BrowserRouter, Redirect } from 'react-router-dom';
 import Login from './components/Login';
 import Posts from './components/Posts';
-import Register from './components/Register';
 import Profile from './components/Profile';
 import SinglePost from './components/SinglePost';
 import Postform from './components/Postform';
@@ -30,8 +29,7 @@ function App() {
           </Route>
 
           <Route path="/login">
-            <Login isLoggedIn={isLoggedIn} updateIsLoggedIn={updateIsLoggedIn}/>
-            <Register isLoggedIn={isLoggedIn} updateIsLoggedIn={updateIsLoggedIn}/>
+            <Login updateIsLoggedIn={updateIsLoggedIn}/>
           </Route>
           <Route path="/">
             <header className="App-header">
