@@ -32,7 +32,7 @@ const Posts = () => {
     }
 
     return (
-        <Container className="content-align-center mx-auto mt-3">
+        <Container className="content-align-center mx-auto mt-3 mb-3">
             <PostSearch 
             allPosts={allPosts}
             updateDisplayPosts={updateDisplayPosts}
