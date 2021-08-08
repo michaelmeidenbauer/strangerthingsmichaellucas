@@ -76,8 +76,7 @@ export const getMyInfo = async (token) => {
 
 /**
  * This functions takes in an authentication token and returns 'posts'
- * array of post objects that is part of the user object. This includes
- * all posts.
+ * array of post objects. This includes all posts.
  * @param {*} token 
  * @returns 
  */
@@ -93,24 +92,39 @@ export const getAllPosts = async (token) => {
   const json = await fetchResult.json();
   return json.data.posts;
 };
-
+/**
+ * This function takes in a title, description, price, location, willDeliver boolean,
+ * and an authentication token. It returns a post object, which includes
+ * a post _id, author object, description, isAuthor boolean, location,
+ * message (array of message objects), price, title, willDeliver boolean,
+ * active boolean, and createdAt and updatedAt time stamps.
+ * @param {*} title 
+ * @param {*} description 
+ * @param {*} price 
+ * @param {*} location 
+ * @param {*} willDeliver 
+ * @param {*} token 
+ * @returns 
+ */
 export const createPost = async (title, description, price, location, willDeliver, token) => {
-  const fetchResult = await fetch(`${apiPath}posts`, {
+  const body = {
+    post: {
+      title,
+      description,
+      price,
+      location,
+      willDeliver,
+    },
+  };
+  const config = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({
-      post: {
-        title,
-        description,
-        price,
-        location,
-        willDeliver,
-      },
-    }),
-  });
+    body: JSON.stringify(body),
+  };
+  const fetchResult = await fetch(`${apiPath}posts`, config);
   const json = await fetchResult.json();
   return json;
 };
