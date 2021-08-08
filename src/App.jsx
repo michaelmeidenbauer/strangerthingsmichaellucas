@@ -33,7 +33,7 @@ function App() {
           </Route>
           <Route path="/">
             <header className="App-header">
-            <img src={BACFullsize} className="App-logo mb-2" alt="welcome to bootleg-ass craigslist"/>
+            <img src={BACFullsize} className="App-logo mb-3" alt="welcome to bootleg-ass craigslist"/>
               <h1 className="mt-3">WELCOME TO BOOTLEG-ASS CRAIGSLIST</h1>
             </header>
           </Route>
