@@ -27,22 +27,48 @@ export const registerUser = async (userName, passWord) => {
   return json;
 };
 
+/**
+ * This function takes in a username and password and returns a success/failure
+ * message, along with an authentication token upon successful login
+ * @param {*} userName 
+ * @param {*} passWord 
+ * @returns 
+ */
 export const loginUser = async (userName, passWord) => {
-  const fetchResult = await fetch(`${apiPath}users/login`, {
+  const body = {
+    user: {
+      username: userName,
+      password: passWord,
+    },
+  };
+
+  const config = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      user: {
-        username: userName,
-        password: passWord,
-      },
-    }),
-  });
+    body: JSON.stringify(body),
+  };
+
+  const fetchResult = await fetch(`${apiPath}users/login`, config);
   const json = await fetchResult.json();
   return json;
-};
+}
+//   {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify({
+//       user: {
+//         username: userName,
+//         password: passWord,
+//       },
+//     }),
+//   });
+//   const json = await fetchResult.json();
+//   return json;
+// };
 
 export const getMyInfo = async (token) => {
   const fetchResult = await fetch(`${apiPath}users/me`, {
