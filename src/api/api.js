@@ -130,6 +130,16 @@ export const createPost = async (title, description, price, location, willDelive
   return json;
 };
 
+/**
+ * 
+ * @param {string} title Post title as updated in the EditPost component at /posts/edit/<postID>
+ * @param {string} description Post description as updated in the EditPost component at /posts/edit/<postID>
+ * @param {string} price Post title as updated in the EditPost component at /posts/edit/<postID>
+ * @param {string} location Post title as updated in the EditPost component at /posts/edit/<postID>
+ * @param {boolean} willDeliver Post title as updated in the EditPost component at /posts/edit/<postID>
+ * @param {string} token Post title as updated in the EditPost component at /posts/edit/<postID>
+ * @param {string} postIDPost title as updated in the EditPost component at /posts/edit/<postID>
+ */
 export const editPost = async (title, description, price, location, willDeliver, token, postID) => {
 
   const body = {
@@ -156,6 +166,16 @@ export const editPost = async (title, description, price, location, willDeliver,
   return json;
 };
 
+/**
+ * 
+ * @param {string} title the title of the post
+ * @param {string} description the description of the post
+ * @param {string} price the price of the post item
+ * @param {string} location the location of the post
+ * @param {boolean} willDeliver the boolean representing whether the user will deliver the item
+ * @param {string} token the user's JWT
+ * @param {string} postID the ID of the post to be deleted
+ */
 export const deletePost = async (title,
   description,
   price,
@@ -189,6 +209,12 @@ export const deletePost = async (title,
   return json;
 };
 
+/**
+ * 
+ * @param {string} content the content of the message as entered by the user
+ * @param {string} postID the ID of the post that the message should be attached to
+ * @param {string} token the user's JWT
+ */
 export const addMessageToPost = async (content, postID, token) => {
   const body = {
     message: {
