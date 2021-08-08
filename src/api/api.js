@@ -54,29 +54,22 @@ export const loginUser = async (userName, passWord) => {
   const json = await fetchResult.json();
   return json;
 }
-//   {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify({
-//       user: {
-//         username: userName,
-//         password: passWord,
-//       },
-//     }),
-//   });
-//   const json = await fetchResult.json();
-//   return json;
-// };
 
+/**
+ * This function takes in an authentication token and returns a user object,
+ * which contains a 'posts' array of post objects, a 'messages' array of message
+ * objects, the unique user '_id', and  the 'username'.
+ * @param {*} token 
+ * @returns 
+ */
 export const getMyInfo = async (token) => {
-  const fetchResult = await fetch(`${apiPath}users/me`, {
+  const config = {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-  });
+  };
+  const fetchResult = await fetch(`${apiPath}users/me`, config);
   const json = await fetchResult.json();
   return json;
 };
