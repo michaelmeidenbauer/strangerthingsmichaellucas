@@ -36,7 +36,6 @@ const Profile = (props) => {
           <h2>My Messages</h2>
           <Accordion defaultActiveKey="0" className="block border">
             <Accordion.Header>Messages to {myInfo.username}</Accordion.Header>
-            {/* <h2>Messages to {myInfo.username}</h2> */}
             <Accordion.Body>
               {myInfo.messages &&
                 myInfo.messages
@@ -49,10 +48,10 @@ const Profile = (props) => {
                       (post) => post._id === postId
                     )[0];
                     if (matchedPost && matchedPost.active) {
-                      return <Message message={message} postId={postId} />;
+                      return <Message key={message._id} message={message} postId={postId} />;
                     }
                     return (
-                      <Message message={message} postId={postId} deleted />
+                      <Message key={message._id} message={message} postId={postId} deleted />
                     );
                   })}
             </Accordion.Body>
@@ -60,7 +59,6 @@ const Profile = (props) => {
 
           <Accordion className="block border">
             <Accordion.Header>Messages from {myInfo.username}</Accordion.Header>
-            {/* <h2>Message from {myInfo.username}</h2> */}
             <Accordion.Body>
               {myInfo.messages &&
                 myInfo.messages
@@ -74,10 +72,10 @@ const Profile = (props) => {
                     )[0];
 
                     if (matchedPost && matchedPost.active) {
-                      return <Message message={message} postId={postId} />;
+                      return <Message key={message._id} message={message} postId={postId} />;
                     }
                     return (
-                      <Message message={message} postId={postId} deleted />
+                      <Message key={message._id} message={message} postId={postId} deleted />
                     );
                   })}
             </Accordion.Body>

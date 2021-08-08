@@ -21,9 +21,11 @@ const ListPosts = ({ post }) => (
             }}>
                 <Card.Title><h3>{post.title}</h3></Card.Title>
             </Link>
-            <Card.Text>
-                <h4>Asking price: {post.price}</h4>
-            </Card.Text>
+            <h4>
+                <Card.Text>
+                Asking price: {post.price}
+                </Card.Text>
+            </h4>
             <Card.Text>
                 {post.description}
             </Card.Text>

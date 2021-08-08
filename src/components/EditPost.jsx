@@ -27,7 +27,6 @@ const EditPost = ({ match }) => {
   const [submitFail, updateSumbitFail] = useState(false);
   const [shouldRedirect, updateShouldRedirect] = useState(false);
   const updateOrDeleteSuccess = updateSuccess || deleteSuccess;
-  console.log(currentPostId);
   useEffect(async () => {
     const localToken = JSON.parse(localStorage.getItem('strangersThingsToken')) ?? null;
     updateToken(localToken);
@@ -45,7 +44,6 @@ const EditPost = ({ match }) => {
     updateWillDeliver(singledOutPost.willDeliver);
     updateTitle(singledOutPost.title);
   }, []);
-  console.log(willDeliver);
   const formSubmitHandler = async (event) => {
     event.preventDefault();
     try {
@@ -64,12 +62,12 @@ const EditPost = ({ match }) => {
         updateSumbitFail(true);
       }
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error(error);
     }
   };
   const handleDelete = async () => {
     const deleteReponse = await deletePost(title, description, price, location, willDeliver, token, currentPostId);
-    console.log(deleteReponse);
     if (deleteReponse.success) {
       setDeleteSuccess(true);
     }

@@ -29,7 +29,7 @@ const PostSearch = ({ allPosts, updateDisplayPosts }) => {
     return (
         <Form onSubmit={searchHandler} className="mt-1 mb-2">
             <Row className="w-50 mx-auto">
-                    <Form.Control className="mt-1 mb-2" type="text" value={searchTerm} placeHolder="Search posts" onChange={event => updateSearchTerm(event.target.value)} />
+                    <Form.Control className="mt-1 mb-2" type="text" value={searchTerm} placeholder="Search posts" onChange={event => updateSearchTerm(event.target.value)} />
             </Row>
             <Row className="w-25 mx-auto">
                 <Button type="submit" className="btn-primary mb-1">Search</Button>
