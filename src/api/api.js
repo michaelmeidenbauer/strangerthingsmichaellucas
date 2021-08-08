@@ -74,16 +74,22 @@ export const getMyInfo = async (token) => {
   return json;
 };
 
+/**
+ * This functions takes in an authentication token and returns 'posts'
+ * array of post objects that is part of the user object. This includes
+ * all posts.
+ * @param {*} token 
+ * @returns 
+ */
 export const getAllPosts = async (token) => {
   // If token exists, add authorization to fetch body, else skip
-
-  const fetchResult = await fetch(`${apiPath}posts`, {
+  const config = {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-  });
-
+  }
+  const fetchResult = await fetch(`${apiPath}posts`, config);
   const json = await fetchResult.json();
   return json.data.posts;
 };
