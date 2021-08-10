@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
 import Container from "react-bootstrap/Container";
-import { loginUser } from "../api/api";
+import { loginUser, getMyInfo } from "../api/api";
 import Register from "./Register";
 
 const Login = (props) => {
@@ -11,7 +11,8 @@ const Login = (props) => {
   const [loginFail, updateLoginFail] = useState(false);
   const [loginSuccess, updateLoginSuccess] = useState(false);
 
-  const { updateIsLoggedIn } = props;
+  // eslint-disable-next-line no-unused-vars
+  const { updateIsLoggedIn, updateLoggedInName } = props;
 
   const loginSubmitHandler = async (event) => {
     event.preventDefault();
@@ -24,6 +25,12 @@ const Login = (props) => {
         data: { token },
       } = loginResult;
       const stringToken = JSON.stringify(token);
+      if (token) {
+        updateIsLoggedIn(true);
+        const userInfo = await getMyInfo(token);
+        const downloadedUserName = userInfo.data.username;
+        updateLoggedInName(downloadedUserName);
+      }
       localStorage.setItem("strangersThingsToken", stringToken);
     } else {
       updateLoginSuccess(false);
@@ -72,6 +79,7 @@ const Login = (props) => {
 };
 Login.propTypes = {
   updateIsLoggedIn: PropTypes.func.isRequired,
+  updateLoggedInName: PropTypes.func.isRequired,
 };
 
 export default Login;
